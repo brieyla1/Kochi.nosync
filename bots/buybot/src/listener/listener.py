@@ -9,14 +9,15 @@ class Listener:
         # keys: "{swap}-{tokenA}-{tokenB}"
         self.events = {}
 
-    def register_event(self, tokenA, tokenB, callback, swap = "uniswap", **kwargs):
+    def register_event(self, tokenA, tokenB, callback, swap="uniswap", **kwargs):
 
-        tokenA, tokenB = web3.toChecksumAddress(tokenA), web3.toChecksumAddress(tokenB)
+        tokenA, tokenB = web3.toChecksumAddress(
+            tokenA), web3.toChecksumAddress(tokenB)
 
         # default to uniswap v2
         if swap == "uniswap":
             swap = "uniswap-v2"
-        
+
         factory = factories[swap]
 
         # do not recreate the event if it already exists
@@ -24,40 +25,50 @@ class Listener:
         if key in self.events:
             self.events[key].callbacks.append(callback)
             return ReturnMessage(True, "Successfully registered event")
-            
 
         # create the event and register it to the running loop
         try:
+            # each dex has a different way to handle new swaps
+            # here is the logic to catch blockchain events
+
+            # uniswap v2
             if swap == "uniswap-v2":
                 pair_addr = factory.functions.getPair(tokenA, tokenB).call()
                 pair = web3.eth.contract(address=pair_addr, abi=pairs[swap])
                 filter = pair.events.Swap().createFilter(fromBlock=0)
-                
-                self.events[key] = EventFilter([callback], filter, tokenA, tokenB, swap, pair_addr)
+
+                self.events[key] = EventFilter(
+                    [callback], filter, tokenA, tokenB, swap, pair_addr)
+
+            # uniswap v3
             if swap == "uniswap-v3":
-                
                 fee = kwargs.get("fee", 1)
                 if not isinstance(fee, int):
                     return ReturnMessage(False, "The fee must be an integer")
 
-                pair_addr = factory.functions.getPool(tokenA, tokenB, kwargs["fee"] ).call()
+                pair_addr = factory.functions.getPool(
+                    tokenA, tokenB, kwargs["fee"]).call()
 
                 if pair_addr == "0x0000000000000000000000000000000000000000":
                     return ReturnMessage(False, "The pair - fee combination does not exist")
-                
+
                 pair = web3.eth.contract(address=pair_addr, abi=pairs[swap])
                 filter = pair.events.Swap().createFilter(fromBlock=0)
 
-                self.events[key] = EventFilter([callback], filter, tokenA, tokenB, swap, pair_addr)
-            
-            self.start_listener(self.events[key])
-            return ReturnMessage(True, "Successfully registered event")
+                self.events[key] = EventFilter(
+                    [callback], filter, tokenA, tokenB, swap, pair_addr)
+
         except Exception as e:
-            return ReturnMessage(False, "Internal error: " + str(e))    
+            print(e)
+            return ReturnMessage(False, "Failed to register event")
+
+        self.start_listener(self.events[key])
+        return ReturnMessage(True, "Successfully registered event")
 
     async def callback_loop(self, event, poll_interval):
         filter = event.filter
-        print("listening for events (dex: {}, tokenA: {}, tokenB: {}, pair_addr: {})".format(event.swap, event.tokenA, event.tokenB, event.pair_addr))
+        print("listening for events (dex: {}, tokenA: {}, tokenB: {}, pair_addr: {})".format(
+            event.swap, event.tokenA, event.tokenB, event.pair_addr))
         while True:
             for entry in filter.get_new_entries():
                 for callback in event.callbacks:
@@ -67,7 +78,8 @@ class Listener:
     def start_listener(self, event):
         loop = asyncio.get_event_loop()
         try:
-            loop.run_until_complete(asyncio.gather(self.callback_loop(event, 2)))
+            loop.run_until_complete(
+                asyncio.gather(self.callback_loop(event, 2)))
         finally:
             loop.close()
 

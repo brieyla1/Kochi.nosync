@@ -12,9 +12,20 @@ def main():
         print("Services: bot, frontend, backend")
         return
 
+    dirn = dirname(realpath(__file__))
+
     service = sys.argv[2]
     if service == "bot":
-        subprocess.run(["python", "src/bot/main.py"])
+        # ask for anothe argument (the subservice)
+        if len(sys.argv) < 4:
+            print("Usage: python manage.py run bot [subservice]")
+            print("Subservices: buybot")
+            return
+
+        subservice = sys.argv[3]
+        subprocess.run(
+            ["bash", f"{dirn}/bots/{subservice}/startdev.sh"],
+            cwd=f"{dirn}/bots/{subservice}")
     elif service == "frontend":
         subprocess.run(["python", "frontend.py"])
     elif service == "backend":
