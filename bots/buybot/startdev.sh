@@ -1,0 +1,1 @@
+PYTHONPATH=. npx nodemon src/main.py --exec python3
