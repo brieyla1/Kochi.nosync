@@ -10,11 +10,11 @@
 
 #### secondary projects
 
-* bots
-  * buybot
+  - bots
+    - buybot
 
-- misc
-  - pfp generator
+  - misc
+    - pfp generator
 
 <!-- # this is a simple tool to help developers run code locally
 # it will run the code in the current directory.
