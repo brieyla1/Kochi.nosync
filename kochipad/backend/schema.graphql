@@ -1,0 +1,41 @@
+type Query {
+  listings(showCount: Int = 30, full: Boolean = false): [Listing]
+  listing(addr: String!): Listing
+}
+
+type Listing {
+  saleId: Int!
+  addr: String!
+  name: String!
+  tokenTotalAmount: String
+  listingTokensPerOneEth: String
+  liquidityShareBP: String
+  hardcap: String
+  softcap: String
+  feeBP: String
+  startTime: Int
+  endTime: Int
+  wlStartTime: Int
+  saleTokensPerOneEth: String
+  liquidityUnlockTimestamp: Int
+  userVestDuration: Int
+  teamVestDuration: Int
+  maxBuyPerUser: String
+  minBuyPerUser: String
+  tokenAmountForSale: String
+  tokenAmountForLiquidity: String
+  userVestEnabled: Boolean
+  teamVestEnabled: Boolean
+  whitelistEnabled: Boolean
+  signer: String
+  router: String
+  token: String
+  description: String
+  imageUrl: String
+  recipient: String
+  saleInitiator: String
+  totalBuyEth: String
+  saleStarted: Boolean
+  saleEnded: Boolean
+  saleAborted: Boolean
+}
