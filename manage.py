@@ -24,12 +24,12 @@ def main():
 
         subservice = sys.argv[3]
         subprocess.run(
-            ["bash", f"{dirn}/bots/{subservice}/startdev.sh"],
+            ["bash", f"startdev.sh"],
             cwd=f"{dirn}/bots/{subservice}")
     elif service == "frontend":
-        subprocess.run(["npm", "run", "start"], cwd=f"{dirn}/kochipad")
+        subprocess.run(["npm", "run", "start"], cwd=f"{dirn}/kochipad/")
     elif service == "backend":
-        subprocess.run(["npm", "run", "startb:dev"], cwd=f"{dirn}/kochipad")
+        subprocess.run(["npm", "run", "startb:dev"], cwd=f"{dirn}/kochipad/")
     elif service == "install":
         subprocess.run(["npm", "install"], cwd=f"{dirn}/kochipad")
     else:
