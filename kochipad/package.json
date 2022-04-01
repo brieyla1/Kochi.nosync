@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "startback": "node backend/index.js",
+    "startback:dev": "nodemon backend/index.js",
     "tailwind:dev": "tailwindcss build styles/globals.css -o styles/tailwind.output.css"
   },
   "dependencies": {
