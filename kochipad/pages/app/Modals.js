@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import PageTitle from '/components/Typography/PageTitle';
-import CTA from '/components/CTA';
+import PageTitle from '/src/components/Typography/PageTitle';
+import CTA from '/src/components/CTA';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from '@windmill/react-ui';
 
 function Modals() {

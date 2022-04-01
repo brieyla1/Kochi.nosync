@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PageTitle from '/components/Typography/PageTitle';
-import PresaleCard from '/components/Presale/PresaleCard';
+import PageTitle from '/src/components/Typography/PageTitle';
+import PresaleCard from '/src/components/Presale/PresaleCard';
 import { Label, Select, Input } from '@windmill/react-ui';
 
 import { SearchIcon } from '/public/assets/icons';
