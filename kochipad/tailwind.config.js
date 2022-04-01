@@ -3,7 +3,7 @@ const windmill = require('@windmill/react-ui/config');
 
 module.exports = windmill({
   mode: 'jit',
-  content: ['src/**/*.js'],
+  content: ['src/**/*.{js}'],
   theme: {
     colors: {
       'k-orange': '#FF6708',
