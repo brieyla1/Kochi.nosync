@@ -1,4 +1,4 @@
-const { web3, master } = require('../../pages/api/web3.js');
+const { web3, master } = require('../web3.js');
 
 async function getListingList() {
   try {

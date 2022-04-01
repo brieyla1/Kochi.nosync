@@ -1,4 +1,4 @@
-const { web3, childAbi } = require('../../pages/api/web3.js');
+const { web3, childAbi } = require('../web3.js');
 
 const keys = [
   'tokenTotalAmount',
