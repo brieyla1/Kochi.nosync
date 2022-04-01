@@ -1,5 +1,5 @@
 import React from 'react';
-import { connectWallet } from '../WebThree/WebThree';
+import { connectWallet } from 'src/web3/web3';
 
 import PageTitle from '/components/Typography/PageTitle';
 import { Card, CardBody, Button, Label } from '@windmill/react-ui';

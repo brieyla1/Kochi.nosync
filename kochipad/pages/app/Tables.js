@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import PageTitle from '/src/components/Typography/PageTitle';
-import SectionTitle from '/src/components/Typography/SectionTitle';
-import CTA from '/src/components/CTA';
+import PageTitle from '/components/Typography/PageTitle';
+import SectionTitle from '/components/Typography/SectionTitle';
+import CTA from '/components/CTA';
 import {
   Table,
   TableHeader,

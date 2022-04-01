@@ -1,15 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { SidebarContext } from 'context/SidebarContext';
-import {
-  SearchIcon,
-  MoonIcon,
-  SunIcon,
-  BellIcon,
-  MenuIcon,
-  OutlinePersonIcon,
-  OutlineCogIcon,
-  OutlineLogoutIcon,
-} from 'icons';
+import { SidebarContext } from 'src/context/SidebarContext';
+import { SearchIcon, MoonIcon, SunIcon, MenuIcon, OutlinePersonIcon, OutlineCogIcon, OutlineLogoutIcon } from 'icons';
 import { Avatar, Badge, Input, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui';
 import { useTheme } from 'next-themes';
 

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import Warning from 'components/Warning';
 import InfoBlock from '/components/Blocks/InfoBlock';
-import response from 'utils/demo/tableData';
+import response from 'src/utils/demo/tableData';
 import KochiNav from '/components/Kochi/KochiNav';
 
-import { doughnutOptions, lineOptions, doughnutLegends, lineLegends } from 'utils/demo/chartsData';
+import { doughnutOptions, lineOptions, doughnutLegends, lineLegends } from 'src/utils/demo/chartsData';
 
 function Dashboard() {
   const [page, setPage] = useState(1);

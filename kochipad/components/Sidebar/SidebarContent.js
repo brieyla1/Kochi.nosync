@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import routes from '../../routes/sidebar';
+import routes from '/src/routes/sidebar';
 import SidebarSubmenu from './SidebarSubmenu';
 import * as Icons from 'icons';
 

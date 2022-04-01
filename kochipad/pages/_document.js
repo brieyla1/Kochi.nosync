@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-// import { GA_TRACKING_ID } from '../utils/gtag';
 import React from 'react';
 
 export default class MyDocument extends Document {

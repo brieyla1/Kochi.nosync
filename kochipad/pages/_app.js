@@ -1,10 +1,10 @@
-import '../styles/globals.css';
+import '/styles/globals.css';
 import 'tailwindcss/tailwind.css';
 
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
 import ProgressLoad from 'components/ProgressLoad';
-import { SidebarProvider } from 'context/SidebarContext';
+import { SidebarProvider } from 'src/context/SidebarContext';
 
 import Navbar from 'components/Navbar';
 import { Windmill } from '@windmill/react-ui';
@@ -20,12 +20,6 @@ function App({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        {/* <meta
-          name='google-site-verification'
-          content={
-            gtag.GOOGLE_VERIF || '-yo'
-          }
-        /> */}
 
         <meta name="yandex-verification" content="356dad746d43cc34" />
 

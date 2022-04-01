@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import InfoBlock from '/src/components/Blocks/InfoBlock';
-import KochiNav from '/src/components/Kochi/KochiNav';
+import InfoBlock from '/components/Blocks/InfoBlock';
+import KochiNav from '/components/Kochi/KochiNav';
 import response from 'src/utils/demo/tableData';
 
 function Dashboard() {

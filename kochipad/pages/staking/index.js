@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PageTitle from '/src/components/Typography/PageTitle';
+import PageTitle from '/components/Typography/PageTitle';
 import { Label, Input, Card, CardBody, Button } from '@windmill/react-ui';
 
 function BrowsePresale() {

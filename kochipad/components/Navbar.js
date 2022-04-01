@@ -3,7 +3,7 @@ import React, { useContext, Suspense, useEffect, lazy } from 'react';
 
 import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
-import { SidebarContext } from 'context/SidebarContext';
+import { SidebarContext } from 'src/context/SidebarContext';
 
 export default function NavbarComponent({ children }) {
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
