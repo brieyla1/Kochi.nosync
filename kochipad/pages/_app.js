@@ -2,13 +2,16 @@ import 'tailwindcss/tailwind.css';
 
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
-import ProgressLoad from '/pages/components/ProgressLoad';
-import React, { useEffect } from 'react';
-import { SidebarProvider } from '/pages/context/SidebarContext';
+import ProgressLoad from '/src/components/ProgressLoad';
+import { SidebarProvider } from '/src/context/SidebarContext';
 
 import { Windmill } from '@windmill/react-ui';
 
-function MyApp({ Component, pageProps }) {
+// SSR displays warnings without this
+import React from 'react';
+React.useLayoutEffect = React.useEffect;
+
+function App({ Component, pageProps }) {
   return (
     <>
       <Head>
@@ -42,4 +45,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default App;

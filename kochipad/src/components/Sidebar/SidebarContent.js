@@ -1,20 +1,20 @@
-import React from 'react'
-import routes from '../../routes/sidebar'
-import { NavLink, Route } from 'react-router-dom'
-import * as Icons from '../../icons'
-import SidebarSubmenu from './SidebarSubmenu'
+import React from 'react';
+import routes from '../../routes/sidebar';
+import { NavLink, Route } from 'react-router-dom';
+import * as Icons from '..//public/assets/icons';
+import SidebarSubmenu from './SidebarSubmenu';
 import logo from '../../../src/assets/img/kochiken-logo.svg';
 
 function Icon({ icon, ...props }) {
-  const Icon = Icons[icon]
-  return <Icon {...props} />
+  const Icon = Icons[icon];
+  return <Icon {...props} />;
 }
 
 function SidebarContent() {
   return (
     <div className="py-4 text-gray-700 dark:text-gray-200">
       <a className="text-lg font-bold text-gray-800 dark:text-gray-200" href="/">
-        <img src={logo} alt="KochiKen Logo" width="100" className="ml-6 hidden lg:block"/>
+        <img src={logo} alt="KochiKen Logo" width="100" className="ml-6 hidden lg:block" />
       </a>
       <ul className="mt-6">
         {routes.map((route) =>
@@ -42,7 +42,7 @@ function SidebarContent() {
         )}
       </ul>
     </div>
-  )
+  );
 }
 
-export default SidebarContent
+export default SidebarContent;

@@ -1,10 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import Link from 'next/link';
 
-import ImageLight from '../assets/img/login-office.jpeg'
-import ImageDark from '../assets/img/login-office-dark.jpeg'
-import { GithubIcon, TwitterIcon } from '../icons'
-import { Label, Input, Button } from '@windmill/react-ui'
+import ImageLight from '/public/assets/img/login-office.jpeg';
+import ImageDark from '/public/assets/img/login-office-dark.jpeg';
+import { GithubIcon, TwitterIcon } from '/public/assets/icons';
+import { Label, Input, Button } from '@windmill/react-ui';
+import Image from 'next/image';
 
 function Login() {
   return (
@@ -12,13 +13,13 @@ function Login() {
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <div className="flex flex-col overflow-y-auto md:flex-row">
           <div className="h-32 md:h-auto md:w-1/2">
-            <img
+            <Image
               aria-hidden="true"
               className="object-cover w-full h-full dark:hidden"
               src={ImageLight}
               alt="Office"
             />
-            <img
+            <Image
               aria-hidden="true"
               className="hidden object-cover w-full h-full dark:block"
               src={ImageDark}
@@ -38,9 +39,11 @@ function Login() {
                 <Input className="mt-1" type="password" placeholder="***************" />
               </Label>
 
-              <Button className="mt-4" block tag={Link} to="/app">
-                Log in
-              </Button>
+              <Link href="/app">
+                <Button className="mt-4" block>
+                  Log in
+                </Button>
+              </Link>
 
               <hr className="my-8" />
 
@@ -56,7 +59,7 @@ function Login() {
               <p className="mt-4">
                 <Link
                   className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                  to="/forgot-password"
+                  href="/forgot-password"
                 >
                   Forgot your password?
                 </Link>
@@ -64,7 +67,7 @@ function Login() {
               <p className="mt-1">
                 <Link
                   className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                  to="/create-account"
+                  href="/create-account"
                 >
                   Create account
                 </Link>
@@ -74,7 +77,7 @@ function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;

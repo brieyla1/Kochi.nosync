@@ -1,9 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { connectWallet } from '../WebThree/WebThree';
-import { SidebarContext } from '/pages/context/SidebarContext';
-import logo from '../assets/img/kochiken-logo.svg';
-import MetamaskLogo from '../assets/img/metamask.svg';
-import { MoonIcon, SunIcon, MenuIcon, OutlinePersonIcon, OutlineCogIcon, OutlineLogoutIcon } from '../icons';
+import { SidebarContext } from '/src/context/SidebarContext';
+import logo from '/public/assets/img/kochiken-logo.svg';
+import MetamaskLogo from '/public/assets/img/metamask.svg';
+import {
+  MoonIcon,
+  SunIcon,
+  MenuIcon,
+  OutlinePersonIcon,
+  OutlineCogIcon,
+  OutlineLogoutIcon,
+} from '/public/assets/icons';
 import { Avatar, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui';
 
 function Header() {

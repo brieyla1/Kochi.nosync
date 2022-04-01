@@ -1,12 +1,11 @@
-import React from 'react'
-import { connectWallet } from '../WebThree/WebThree'
+import React from 'react';
+import { connectWallet } from '../WebThree/WebThree';
 
-import PageTitle from '../components/Typography/PageTitle'
-import { Card, CardBody, Button, Label } from '@windmill/react-ui'
-import TokenImage from '../assets/img/catoshi.svg';
+import PageTitle from '../components/Typography/PageTitle';
+import { Card, CardBody, Button, Label } from '@windmill/react-ui';
+import TokenImage from '/public/assets/img/catoshi.svg';
 
 function ExamplePresale() {
-
   function exampleFunction() {
     connectWallet();
   }
@@ -22,7 +21,12 @@ function ExamplePresale() {
           <CardBody className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800 border border-gray-600 p-5">
             <div className="grid gap-6 mt-4 mb-5 grid-cols-3">
               <div className="col-span-2 flex">
-                <img src={TokenImage} alt="" className="mr-6 inline-block rounded-full border-2 border-white" width="75" />
+                <img
+                  src={TokenImage}
+                  alt=""
+                  className="mr-6 inline-block rounded-full border-2 border-white"
+                  width="75"
+                />
                 <div className="inline-block">
                   <h1 className="text-2xl font-medium text-gray-900 dark:text-white">Catoshi</h1>
                   <span className="text-l font-medium text-gray-700 dark:text-gray-200">1 ETH = 1,000,000,000,000</span>
@@ -35,7 +39,11 @@ function ExamplePresale() {
             </div>
 
             <div className="mt-6 mb-8 text-lg text-black dark:text-white">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat.
+              </p>
             </div>
 
             {/* <!-- Presale Address --> */}
@@ -48,7 +56,7 @@ function ExamplePresale() {
                   value="0xB4c08d26FF8B1eD4f51511C12863331A9A9De880"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Presale Address	
+                  Presale Address
                 </div>
               </div>
             </Label>
@@ -64,7 +72,7 @@ function ExamplePresale() {
                   value="SaitaMax"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Token Name	
+                  Token Name
                 </div>
               </div>
             </Label>
@@ -80,7 +88,7 @@ function ExamplePresale() {
                   value="STMAX"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Token Symbol		
+                  Token Symbol
                 </div>
               </div>
             </Label>
@@ -96,7 +104,7 @@ function ExamplePresale() {
                   value="18"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Token Decimals		
+                  Token Decimals
                 </div>
               </div>
             </Label>
@@ -112,7 +120,7 @@ function ExamplePresale() {
                   value="100,000,000,000"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Token Supply			
+                  Token Supply
                 </div>
               </div>
             </Label>
@@ -128,7 +136,7 @@ function ExamplePresale() {
                   value="50,000,000,000"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Presale Tokens			
+                  Presale Tokens
                 </div>
               </div>
             </Label>
@@ -144,7 +152,7 @@ function ExamplePresale() {
                   value="25,000,000,000"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Liquidity Tokens			
+                  Liquidity Tokens
                 </div>
               </div>
             </Label>
@@ -160,7 +168,7 @@ function ExamplePresale() {
                   value="2,000,000,000 per ETH"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Presale Rate			
+                  Presale Rate
                 </div>
               </div>
             </Label>
@@ -176,7 +184,7 @@ function ExamplePresale() {
                   value="1,800,000,000 per ETH"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Listing Rate			
+                  Listing Rate
                 </div>
               </div>
             </Label>
@@ -192,7 +200,7 @@ function ExamplePresale() {
                   value="Uniswap"
                 />
                 <div className="presale__value-label absolute inset-y-0 px-4 pt-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-600 border border-transparent rounded-l-md">
-                  Listing On			
+                  Listing On
                 </div>
               </div>
             </Label>
@@ -213,7 +221,6 @@ function ExamplePresale() {
               </div>
             </Label>
             {/* <!-- Initial Marketcap --> */}
-
           </CardBody>
         </Card>
         <div>
@@ -222,7 +229,7 @@ function ExamplePresale() {
               className="cursor-not-allowed hover:text-white font-bold text-md mb-6 bg-white text-gray-900"
               onClick={exampleFunction}
             >
-                Enter the whitelist raffle
+              Enter the whitelist raffle
             </Button>
           </div>
           <Card className="col-span-1">
@@ -230,7 +237,13 @@ function ExamplePresale() {
               <div className="border-1 rounded-lg">
                 <span className="text-white">Progress (20%)</span>
                 <div className="w-full bg-gray-600 rounded-full my-4">
-                  <div className="bg-k-orange text-xs text-blue-100 text-center p-1 font-bold leading-none rounded-l-full" style={{ width: `${20}%` }}> 20%</div>
+                  <div
+                    className="bg-k-orange text-xs text-blue-100 text-center p-1 font-bold leading-none rounded-l-full"
+                    style={{ width: `${20}%` }}
+                  >
+                    {' '}
+                    20%
+                  </div>
                 </div>
                 <div className="grid grid-cols-2">
                   <div>
@@ -293,7 +306,7 @@ function ExamplePresale() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default ExamplePresale
+export default ExamplePresale;

@@ -1,5 +1,5 @@
 import React from 'react';
-import kochiDog from '../../assets/img/kochi/kochi-1.svg';
+import kochiDog from '..//public/assets/img/kochi/kochi-1.svg';
 
 import { Button } from '@windmill/react-ui';
 

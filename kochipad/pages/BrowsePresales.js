@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import PageTitle from '../components/Typography/PageTitle'
-import PresaleCard from '../components/Presale/PresaleCard'
-import { Label, Select, Input } from '@windmill/react-ui'
+import PageTitle from '../components/Typography/PageTitle';
+import PresaleCard from '../components/Presale/PresaleCard';
+import { Label, Select, Input } from '@windmill/react-ui';
 
-import Wolf from '../assets/img/wolf.jpg';
-import Catoshi from '../assets/img/catoshi.svg';
-import Kochi from '../assets/img/kochi/kochi-1.svg';
+import Wolf from '/public/assets/img/wolf.jpg';
+import Catoshi from '/public/assets/img/catoshi.svg';
+import Kochi from '/public/assets/img/kochi/kochi-1.svg';
 
-import { SearchIcon } from '../icons'
+import { SearchIcon } from '/public/assets/icons';
 
 function BrowsePresale() {
   return (
@@ -103,7 +103,7 @@ function BrowsePresale() {
         />
       </div>
     </>
-  )
+  );
 }
 
-export default BrowsePresale
+export default BrowsePresale;
