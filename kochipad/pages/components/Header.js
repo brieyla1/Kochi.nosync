@@ -1,36 +1,30 @@
-import React, { useContext, useState } from 'react'
-import { connectWallet } from '../WebThree/WebThree'
-import { SidebarContext } from '../context/SidebarContext'
+import React, { useContext, useState } from 'react';
+import { connectWallet } from '../WebThree/WebThree';
+import { SidebarContext } from '/pages/context/SidebarContext';
 import logo from '../assets/img/kochiken-logo.svg';
 import MetamaskLogo from '../assets/img/metamask.svg';
-import {
-  MoonIcon,
-  SunIcon,
-  MenuIcon,
-  OutlinePersonIcon,
-  OutlineCogIcon,
-  OutlineLogoutIcon,
-} from '../icons'
-import { Avatar, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui'
+import { MoonIcon, SunIcon, MenuIcon, OutlinePersonIcon, OutlineCogIcon, OutlineLogoutIcon } from '../icons';
+import { Avatar, Dropdown, DropdownItem, WindmillContext } from '@windmill/react-ui';
 
 function Header() {
-  const { mode, toggleMode } = useContext(WindmillContext)
-  const { toggleSidebar } = useContext(SidebarContext)
+  console.log(WindmillContext, SidebarContext);
+  const { mode, toggleMode } = useContext(WindmillContext);
+  const { toggleSidebar } = useContext(SidebarContext);
 
-  const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false)
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+  const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   function handleNotificationsClick() {
-    setIsNotificationsMenuOpen(!isNotificationsMenuOpen)
+    setIsNotificationsMenuOpen(!isNotificationsMenuOpen);
   }
 
   function handleProfileClick() {
-    setIsProfileMenuOpen(!isProfileMenuOpen)
+    setIsProfileMenuOpen(!isProfileMenuOpen);
   }
 
-  function handleConnectWallet(){
-    connectWallet()
-  };
+  function handleConnectWallet() {
+    connectWallet();
+  }
 
   return (
     <header className="z-40 py-4 bg-white shadow-bottom dark:bg-gray-800">
@@ -44,7 +38,10 @@ function Header() {
           <ul className="flex items-center flex-shrink-0 space-x-3">
             {/* <!-- Connect Wallet Button --> */}
             <li>
-              <button onClick={handleConnectWallet} className="bg-transparent dark:hover:text-white dark:text-gray-400 font-semibold md:py-2 md:px-4 md:border dark:border-grey-500 dark:hover:border-white rounded mt-1">
+              <button
+                onClick={handleConnectWallet}
+                className="bg-transparent dark:hover:text-white dark:text-gray-400 font-semibold md:py-2 md:px-4 md:border dark:border-grey-500 dark:hover:border-white rounded mt-1"
+              >
                 <span className="inline-block">
                   <img src={MetamaskLogo} alt="Metamask" width="20" className="md:inline-block hidden mr-2" />
                   <img src={MetamaskLogo} alt="Metamask" width="25" className="md:hidden block" />
@@ -74,18 +71,9 @@ function Header() {
                 aria-label="Account"
                 aria-haspopup="true"
               >
-                <Avatar
-                  className="align-middle"
-                  src="https://i.imgur.com/YRAJKSd.png"
-                  alt=""
-                  aria-hidden="true"
-                />
+                <Avatar className="align-middle" src="https://i.imgur.com/YRAJKSd.png" alt="" aria-hidden="true" />
               </button>
-              <Dropdown
-                align="right"
-                isOpen={isProfileMenuOpen}
-                onClose={() => setIsProfileMenuOpen(false)}
-              >
+              <Dropdown align="right" isOpen={isProfileMenuOpen} onClose={() => setIsProfileMenuOpen(false)}>
                 <DropdownItem tag="a" href="#">
                   <OutlinePersonIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                   <span>Profile</span>
@@ -114,7 +102,7 @@ function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
