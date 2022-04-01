@@ -1,9 +1,9 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-const windmill = require('@windmill/react-ui/config')
+const defaultTheme = require('tailwindcss/defaultTheme');
+const windmill = require('@windmill/react-ui/config');
 
 module.exports = windmill({
   mode: 'jit',
-  purge: ['src/**/*.js'],
+  content: ['src/**/*.js'],
   theme: {
     colors: {
       'k-orange': '#FF6708',
@@ -17,4 +17,4 @@ module.exports = windmill({
       },
     },
   },
-})
+});

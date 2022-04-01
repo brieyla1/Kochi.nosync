@@ -27,9 +27,11 @@ def main():
             ["bash", f"{dirn}/bots/{subservice}/startdev.sh"],
             cwd=f"{dirn}/bots/{subservice}")
     elif service == "frontend":
-        subprocess.run(["python", "frontend.py"])
+        subprocess.run(["npm", "run", "start"], cwd=f"{dirn}/kochipad")
     elif service == "backend":
-        subprocess.run(["python", "backend.py"])
+        subprocess.run(["npm", "run", "startb:dev"], cwd=f"{dirn}/kochipad")
+    elif service == "install":
+        subprocess.run(["npm", "install"], cwd=f"{dirn}/kochipad")
     else:
         print("Unknown service: {}".format(service))
 
