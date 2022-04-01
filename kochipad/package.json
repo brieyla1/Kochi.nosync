@@ -1,109 +1,40 @@
 {
-  "name": "windmill-dashboard-react",
-  "version": "0.4.0",
-  "description": "A multi theme, completely accessible, with components and pages examples, (almost) ready for production dashboard.",
+  "name": "windmill-next",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "tailwind:dev": "tailwindcss build src/assets/css/tailwind.css -o public/assets/css/tailwind.output.css",
-    "tailwind:build": "cross-env NODE_ENV=production postcss src/assets/css/tailwind.css -o public/assets/css/tailwind.output.css",
-    "dev": "next dev -p 8080",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 8080",
-    "startb": "nodemon backend/index.js",
-    "startb:dev": "nodemon backend/index.js"
+    "start": "next start",
+    "tailwind:dev": "tailwindcss build styles/globals.css -o styles/tailwind.output.css"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.10",
-    "@testing-library/jest-dom": "4.2.4",
-    "@testing-library/react": "9.5.0",
-    "@testing-library/user-event": "7.2.1",
-    "@windmill/react-ui": "0.3.1",
-    "@zeit/next-css": "^1.0.1",
-    "apollo-server-core": "^3.6.6",
-    "apollo-server-express": "^3.6.6",
-    "chart.js": "2.9.3",
-    "classnames": "2.2.6",
-    "cors": "^2.8.5",
-    "express": "^4.17.3",
-    "express-graphql": "^0.12.0",
-    "faker": "4.1.0",
-    "graphql": "^16.3.0",
-    "graphql-tag": "^2.12.6",
-    "memoizee": "^0.4.15",
+    "@windmill/react-ui": "^0.5.1",
+    "chart.js": "^3.1.1",
+    "classnames": "^2.3.1",
     "next": "^12.1.4",
     "next-compose-plugins": "^2.2.1",
-    "next-purgecss": "^4.0.0",
-    "next-pwa": "^5.4.6",
-    "next-seo": "^5.3.0",
+    "next-pwa": "^5.2.14",
+    "next-seo": "^4.24.0",
+    "next-themes": "^0.1.1",
     "nprogress": "^0.2.0",
-    "react": "^16.14.0",
-    "react-chartjs-2": "2.9.0",
-    "react-dom": "^16.14.0",
-    "react-focus-lock": "2.4.0",
-    "react-scripts": "3.4.1",
-    "react-transition-group": "4.4.1",
+    "react": "17.0.2",
+    "react-chartjs-2": "^3.0.2",
+    "react-dom": "17.0.2",
     "tailwind": "^4.0.0",
-    "web3": "^1.7.1",
-    "web3modal": "^1.9.5"
+    "tailwindcss": "^3.0.23"
   },
   "devDependencies": {
-    "@release-it/conventional-changelog": "1.1.4",
-    "@svgr/webpack": "5.4.0",
+    "@svgr/webpack": "^5.5.0",
+    "@zeit/next-css": "^1.0.1",
+    "autoprefixer": "^10.2.5",
+    "cssnano": "^5.0.1",
+    "next-purgecss": "^4.0.0",
+    "postcss": "^8.2.12",
+    "url-loader": "^4.1.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/line-clamp": "^0.3.1",
-    "@tailwindcss/typography": "^0.5.2",
-    "autoprefixer": "^10.4.4",
-    "commitizen": "4.1.2",
-    "cross-env": "7.0.2",
-    "cssnano": "4.1.10",
-    "cz-conventional-changelog": "3.2.0",
-    "postcss": "^8.4.12",
-    "postcss-cli": "7.1.1",
-    "react-axe": "3.5.2",
-    "release-it": "13.6.4",
-    "tailwindcss": "^3.0.23",
-    "typechain": "^7.0.0"
-  },
-  "keywords": [
-    "windmill",
-    "dashboard",
-    "admin",
-    "tailwind",
-    "react"
-  ],
-  "release-it": {
-    "github": {
-      "release": true
-    },
-    "npm": {
-      "publish": false
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular",
-        "infile": "CHANGELOG.md"
-      }
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./no_modules/cz-conventional-changelog"
-    }
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@tailwindcss/typography": "^0.5.2"
   }
 }

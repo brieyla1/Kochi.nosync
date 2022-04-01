@@ -4,6 +4,7 @@ const windmill = require('./windmill.css.js');
 const tailwindcssConfig = windmill({
   mode: 'jit',
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     colors: {
       'k-orange': '#FF6708',

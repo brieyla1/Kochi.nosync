@@ -1,12 +1,11 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "utils/*": ["./utils/*"],
-        "components/*": ["./components/*"],
-        "context/*": ["./context/*"],
-        "icons/*": ["./icons/*"]
-      }
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "utils/*": ["./utils/*"],
+      "components/*": ["./components/*"],
+      "context/*": ["./context/*"],
+      "icons/*": ["./icons/*"]
     }
   }
-  
+}
