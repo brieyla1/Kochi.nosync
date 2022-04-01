@@ -1,3 +1,4 @@
+import '../styles/globals.css';
 import 'tailwindcss/tailwind.css';
 
 import { DefaultSeo } from 'next-seo';

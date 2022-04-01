@@ -1,7 +1,7 @@
 import React from 'react';
 import routes from '../../routes/sidebar';
 import { NavLink, Route } from 'react-router-dom';
-import * as Icons from '..//public/assets/icons';
+import * as Icons from '/public/assets/icons';
 import SidebarSubmenu from './SidebarSubmenu';
 import logo from '../../../src/assets/img/kochiken-logo.svg';
 

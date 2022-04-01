@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Jura', system-ui, sans-serif;
+    background-image: url('/img/kochi/paw.svg');
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Russo One', 'Jura', system-ui, sans-serif;
+    letter-spacing: 1px;
+  }
+
+  .presale__value-label {
+    font-weight: 700 !important;
+    min-width: 150px;
+    text-align: center;
+  }
+
+  .presale-card {
+    transform: scale(1);
+    -webkit-transition-duration: .3s;
+    transition-duration: .3s;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+  }
+
+  .presale-card:hover {
+    transform: scale(1.0115);
+  }
+}

@@ -1,27 +1,25 @@
-import React, { useContext, Suspense, useEffect, lazy } from 'react'
-import { Switch, Route, useLocation } from 'react-router-dom'
-import routes from '../routes'
+import React, { useContext, Suspense, useEffect, lazy } from 'react';
+import { Switch, Route, useLocation } from 'react-router-dom';
+import routes from '../routes';
 
-import Sidebar from '../components/Sidebar'
-import Header from '../components/Header'
-import Main from '../containers/Main'
-import ThemedSuspense from '../components/ThemedSuspense'
-import { SidebarContext } from '../context/SidebarContext'
+import Sidebar from '/src/components/Sidebar';
+import Header from '/src/components/Header';
+import Main from '../containers/Main';
+import ThemedSuspense from '/src/components/ThemedSuspense';
+import { SidebarContext } from '../context/SidebarContext';
 
-const Page404 = lazy(() => import('../pages/404'))
+const Page404 = lazy(() => import('../pages/404'));
 
 function Layout() {
-  const { isSidebarOpen, closeSidebar } = useContext(SidebarContext)
-  let location = useLocation()
+  const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
+  let location = useLocation();
 
   useEffect(() => {
-    closeSidebar() // eslint-disable-next-line
-  }, [location])
+    closeSidebar(); // eslint-disable-next-line
+  }, [location]);
 
   return (
-    <div
-      className={`flex h-screen bg-gray-50 dark:bg-gray-900 ${isSidebarOpen && 'overflow-hidden'}`}
-    >
+    <div className={`flex h-screen bg-gray-50 dark:bg-gray-900 ${isSidebarOpen && 'overflow-hidden'}`}>
       <Sidebar />
 
       <div className="flex flex-col flex-1 w-full">
@@ -37,7 +35,7 @@ function Layout() {
                     path={`${route.path}`}
                     render={(props) => <route.component {...props} />}
                   />
-                ) : null
+                ) : null;
               })}
               <Route component={Page404} />
             </Switch>
@@ -45,7 +43,7 @@ function Layout() {
         </Main>
       </div>
     </div>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

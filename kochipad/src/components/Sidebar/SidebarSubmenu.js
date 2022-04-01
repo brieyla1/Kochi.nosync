@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { DropdownIcon } from '..//public/assets/icons';
-import * as Icons from '..//public/assets/icons';
+import { DropdownIcon } from '/public/assets/icons';
+import * as Icons from '/public/assets/icons';
 import { Transition } from '@windmill/react-ui';
 
 function Icon({ icon, ...props }) {
