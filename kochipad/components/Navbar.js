@@ -5,7 +5,9 @@ import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
 import { SidebarContext } from 'src/context/SidebarContext';
 
-export default function NavbarComponent({ children }) {
+export default function NavbarComponent({ children, isHidden }) {
+  if (isHidden) return <>{children}</>;
+
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
   let location = useRouter();
 
@@ -24,5 +26,4 @@ export default function NavbarComponent({ children }) {
       </div>
     </div>
   );
-  return <>{children}</>;
 }

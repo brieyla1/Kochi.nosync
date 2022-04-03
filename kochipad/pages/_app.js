@@ -32,7 +32,6 @@ function App({ Component, pageProps }) {
         <meta name="description" content="Windmill Dashboard for nextjs" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.1/css/all.css" />
       </Head>
-
       <style jsx global>{`
         html {
           font-family: 'Roboto', sans-serif;
@@ -40,12 +39,11 @@ function App({ Component, pageProps }) {
           scroll-behavior: smooth;
         }
       `}</style>
-
       <DefaultSeo />
       <ThemeProvider attribute="class">
         <SidebarProvider>
           <Windmill usePreferences={true}>
-            <Navbar>
+            <Navbar isHidden={!!Component.metadata && !!Component.metadata.hidePanel}>
               <ProgressLoad />
               <Component {...pageProps} />
             </Navbar>
