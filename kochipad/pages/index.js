@@ -5,8 +5,6 @@ import InfoBlock from '/components/Blocks/InfoBlock';
 import response from 'src/utils/demo/tableData';
 import KochiNav from '/components/Kochi/KochiNav';
 
-import { doughnutOptions, lineOptions, doughnutLegends, lineLegends } from 'src/utils/demo/chartsData';
-
 function Dashboard() {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);

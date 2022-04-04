@@ -26,4 +26,11 @@ module.exports = {
       },
     },
   },
+  // rinkeby
+  networks: {
+    rinkeby: {
+      url: `https://eth-rinkeby.alchemyapi.io/v2/wESK28uC2bhbARFkT_vl5GSzbklbOeKd`,
+      accounts: [`7fa0d737703ac0f9e1828164e0684d05120e22dd2bc2c4b7062397ce0ef263b6`],
+    },
+  },
 };
