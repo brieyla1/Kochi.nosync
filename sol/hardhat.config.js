@@ -10,6 +10,18 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
   }
 });
 
+const fs = require('fs');
+fs.readFileSync('../config.env')
+  .toString()
+  .split('\n')
+  .forEach((line) => {
+    const [key, value] = line.split('=');
+    if (key && value) {
+      console.log(line);
+      process.env[key] = value;
+    }
+  });
+
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
@@ -30,7 +42,7 @@ module.exports = {
   networks: {
     rinkeby: {
       url: `https://eth-rinkeby.alchemyapi.io/v2/wESK28uC2bhbARFkT_vl5GSzbklbOeKd`,
-      accounts: [`7fa0d737703ac0f9e1828164e0684d05120e22dd2bc2c4b7062397ce0ef263b6`],
+      accounts: [process.env.PRIVATE_KEY],
     },
   },
 };
