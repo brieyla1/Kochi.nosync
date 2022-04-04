@@ -12,20 +12,20 @@ type Listing {
   liquidityShareBP: String
   hardcap: String
   softcap: String
-  feeBP: String
+  fee: String
   startTime: Int
   endTime: Int
   wlStartTime: Int
   saleTokensPerOneEth: String
   liquidityUnlockTimestamp: Int
-  userVestDuration: Int
-  teamVestDuration: Int
   maxBuyPerUser: String
   minBuyPerUser: String
   tokenAmountForSale: String
   tokenAmountForLiquidity: String
   userVestEnabled: Boolean
   teamVestEnabled: Boolean
+  userVestDuration: Int
+  teamVestDuration: Int
   whitelistEnabled: Boolean
   signer: String
   router: String
