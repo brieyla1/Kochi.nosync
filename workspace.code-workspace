@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "kochipad"
+		},
+		{
+			"path": "bots"
+		},
+		{
+			"path": "sol"
+		},
+		{
+			"path": "misc"
+		}
+	],
+	"settings": {
+		"solidity.defaultCompiler": "localNodeModule",
+		"solidity.compileUsingRemoteVersion": "latest"
+	}
+}

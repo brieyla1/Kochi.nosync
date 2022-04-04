@@ -1,13 +1,18 @@
-import React from 'react';
-import { connectWallet } from 'src/web3/web3';
+import React, { useEffect } from 'react';
+import { connectWallet, isWalletConnected } from '../../src/web3/web3';
 
 import PageTitle from '/components/Typography/PageTitle';
 import { Card, CardBody, Button, Label } from '@windmill/react-ui';
 import TokenImage from '/public/assets/img/catoshi.svg';
 
-function ExamplePresale() {
-  function exampleFunction() {
-    connectWallet();
+function IndividualPresale() {
+  function enterWhitelabelRaffle() {
+    if (isWalletConnected()) {
+      // @todo: Whitelist raffle logic
+      console.log('Trigger whitelist raffle entry');
+    } else {
+      connectWallet();
+    }
   }
 
   return (
@@ -226,8 +231,8 @@ function ExamplePresale() {
         <div>
           <div className="text-center">
             <Button
-              className="cursor-not-allowed hover:text-white font-bold text-md mb-6 bg-white text-gray-900"
-              onClick={exampleFunction}
+              className="bg-k-orange text-white cursor-not-allowed hover:text-white font-bold text-md mb-6 bg-white"
+              onClick={enterWhitelabelRaffle}
             >
               Enter the whitelist raffle
             </Button>
@@ -273,7 +278,7 @@ function ExamplePresale() {
                     </button>
                   </div>
                   <div className="grid grid-cols-2 mt-4">
-                    <Button className="font-bold text-md">Buy</Button>
+                    <Button className="font-bold text-md bg-k-orange">Buy</Button>
                     <div className="text-k-orange flex items-center flex-row-reverse">Antibot enabled</div>
                   </div>
                 </Label>
@@ -309,4 +314,4 @@ function ExamplePresale() {
   );
 }
 
-export default ExamplePresale;
+export default IndividualPresale;

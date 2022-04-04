@@ -22,7 +22,7 @@ async function main() {
   const Master = await hre.ethers.getContractFactory('LaunchpadMaster');
   // deploy fee = 0.1 ether
   const fee = ethers.utils.parseEther('0.1');
-  const master = await Master.deploy(500, 0, owner, user1, fee);
+  const master = await Master.deploy(500, owner, user1, fee);
 
   await master.deployed();
 

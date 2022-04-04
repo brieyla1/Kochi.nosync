@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
-import "./launchpadChild.sol";
+import "contracts/launchpad/launchpadChild.sol";
 
 // V 0.1
 // TODO: add pauser
@@ -20,8 +20,10 @@ contract LaunchpadMaster is Ownable, ReentrancyGuard, Pausable {
   mapping(address => uint256) public addressToSaleId;
   mapping(uint256 => address) public saleToSigner;
   mapping(uint256 => Sale) public saleIdToSale;
+  
   uint256 public currentSaleId;
-  uint256 public feesBP; // Fees in basis points (100 = 1%)
+  
+  uint256 public fees; // Fees in basis points (100 = 1%)
   uint256 public startSaleId; // Start of the sale count
   uint256 public deployFee; // Amount to pay to deploy a sale
   address public signer; // who signs for presales
@@ -35,17 +37,18 @@ contract LaunchpadMaster is Ownable, ReentrancyGuard, Pausable {
 
 
   constructor(
-    uint256 _feesBP,
-    uint256 _startSaleId,
+    uint256 _fees,
     address _signer,
     address _feesWallet,
     uint256 _deployFee
   ) {
-    feesBP = _feesBP;
     feesWallet = payable(_feesWallet);
-    currentSaleId = _startSaleId;
     signer = _signer;
+    
     deployFee = _deployFee;
+    fees = _fees;
+
+    currentSaleId = 0;
   }
 
   function createPresale(
@@ -54,7 +57,6 @@ contract LaunchpadMaster is Ownable, ReentrancyGuard, Pausable {
     string memory _description,
     string memory _imageUrl,
     // Sale inputs
-    // We use an array to solve stackTooDeep error
     uint256[8] memory _saleInputs,
     // uint _tokenTotalAmount,
     // uint _listingTokensPerOneEth,
@@ -132,9 +134,9 @@ contract LaunchpadMaster is Ownable, ReentrancyGuard, Pausable {
     signer = _signer;
   }
 
-  function setFeesBP(uint _feesBP) external onlyOwner {
-    require(_feesBP < 10_000, "too high");
-    feesBP = _feesBP;
+  function setfees(uint _fees) external onlyOwner {
+    require(_fees < 10_000, "too high");
+    fees = _fees;
   }
 
   function setDeployFee(uint _deployFee) external onlyOwner {

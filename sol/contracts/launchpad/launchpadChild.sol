@@ -7,9 +7,9 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
-import "./IUniswapV2Router.sol";
-import "./IUniswapV2Factory.sol";
-import "./ILaunchpadMaster.sol";
+import "contracts/interfaces/IUniswapV2Router.sol";
+import "contracts/interfaces/IUniswapV2Factory.sol";
+import "contracts/interfaces/ILaunchpadMaster.sol";
 
 // V 0.1
 contract LaunchpadChild is ReentrancyGuard, Pausable {
@@ -27,8 +27,6 @@ contract LaunchpadChild is ReentrancyGuard, Pausable {
   // Utils variables
   uint256 public saleTokensPerOneEth; // How much tokens do I get for 1 ETH bought
   uint256 public liquidityUnlockTimestamp; // How long will the liquidity be locked after the sale ends
-  uint256 public userVestDuration; // How long will the user need to vest after the sale ends
-  uint256 public teamVestDuration; // How long will the team need to vest after the sale ends
 
   uint256 public maxBuyPerUser; // Max amount in eth allowed to buy
   uint256 public minBuyPerUser; // Min amount in eth allowed to buy
@@ -63,8 +61,12 @@ contract LaunchpadChild is ReentrancyGuard, Pausable {
   bool public saleEnded; // Is the sale ended and tokens are ready to be claimed?
   bool public saleAborted; // Allows the dev to abort the sale and the users to get their eth back
 
-  mapping(address => address) public usersVestingWallets; // Vesting wallet of each user (to be confirmed)
   mapping(address => uint256) public userBuyAmount; // Eth pledged by each user
+
+  // useless code
+  uint256 public userVestDuration; // How long will the user need to vest after the sale ends
+  uint256 public teamVestDuration; // How long will the team need to vest after the sale ends
+  mapping(address => address) public usersVestingWallets; // Vesting wallet of each user (to be confirmed)
 
   event Debug(uint256 amount);
 
@@ -196,7 +198,7 @@ contract LaunchpadChild is ReentrancyGuard, Pausable {
     require(minBuyPerUser < hardcap, "min buy per user is higher than hardcap");
 
     master = ILaunchpadMaster(msg.sender);
-    feeBP = master.feesBP();
+    feeBP = master.fees();
 
     saleTokensPerOneEth =
       ((tokenTotalAmount * (10_000 - liquidityShareBP)) / 10_000) /

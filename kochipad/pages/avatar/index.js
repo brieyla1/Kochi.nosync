@@ -86,7 +86,7 @@ function AvatarGenerator() {
       context.fillStyle = '#000';
       context.beginPath();
       context.arc(
-        imageDimensionsX * 0.5,
+        imageDimensionsX * 0.5, // x
         imageDimensionsY * 0.5, // y
         (imageDimensionsX - customPicturePadding) * 0.5, // radius
         0, // start angle
