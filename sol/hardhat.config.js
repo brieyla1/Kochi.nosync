@@ -22,9 +22,6 @@ fs.readFileSync('../config.env')
     }
   });
 
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
-
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
