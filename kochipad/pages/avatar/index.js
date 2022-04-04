@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   ChakraProvider,
@@ -6,7 +6,6 @@ import {
   Center,
   SimpleGrid,
   Box,
-  Image,
   Button,
   Divider,
   Heading,
@@ -23,22 +22,91 @@ const theme = extendTheme({
   },
 });
 
+const imageDimensionsX = 512;
+const imageDimensionsY = 512;
+const customPicturePadding = 15;
+
+let current_traits = {};
+
 function AvatarGenerator() {
   const filePhotoRef = React.useRef();
   const canvasRef = React.useRef(null);
 
-  const [selectedTrait, setSelectedTrait] = React.useState(
-    Object.keys(traits).map((key) => ({ key, value: traits[key][0] }))
-  );
+  // selected trait: {trait: index}
+  // traits object: {trait: {name: string}}}
+  const [selectedTrait, setSelectedTrait] = React.useState({});
+  const [customPicture, setCustomPicture] = React.useState(null);
 
   function updateTrait(trait, value) {
-    setSelectedTrait(selectedTrait.map((t) => (t.key === trait ? { key: t.key, value } : t)));
-    // generateAvatar();
+    setSelectedTrait({
+      ...selectedTrait,
+      [trait]: value,
+    });
+  }
+
+  useEffect(() => {
+    randomizeTraits();
+  }, []);
+
+  useEffect(() => {
+    generateAvatar();
+  }, [selectedTrait, customPicture]);
+
+  async function generateAvatar() {
+    // wait for file to be loaded using a resolve promise
+    const loadImage = (trait) =>
+      new Promise((resolve, reject) => {
+        let img = new Image();
+        img.setAttribute('crossOrigin', 'anonymous');
+        img.onload = () => resolve(img);
+        img.src = 'assets/avatar-generator/traits/' + selectedTrait[trait] + '.png';
+      });
+
+    // load all images
+    for (let trait in traits) current_traits[trait] = await loadImage(trait);
+
+    // update canvas
+    buildAvatar();
+  }
+
+  function buildAvatar() {
+    const context = canvasRef.current.getContext('2d');
+    context.clearRect(0, 0, imageDimensionsX, imageDimensionsY);
+
+    if (customPicture !== null) {
+      context.drawImage(
+        customPicture,
+        customPicturePadding,
+        customPicturePadding,
+        imageDimensionsX - customPicturePadding,
+        imageDimensionsY - customPicturePadding
+      );
+      context.globalCompositeOperation = 'destination-in';
+
+      context.fillStyle = '#000';
+      context.beginPath();
+      context.arc(
+        imageDimensionsX * 0.5,
+        imageDimensionsY * 0.5, // y
+        (imageDimensionsX - customPicturePadding) * 0.5, // radius
+        0, // start angle
+        2 * Math.PI // end angle
+      );
+      context.fill();
+      context.globalCompositeOperation = 'source-over';
+
+      context.drawImage(current_traits['Circle'], 0, 0, imageDimensionsX, imageDimensionsY);
+    } else {
+      for (const trait in traits) context.drawImage(current_traits[trait], 0, 0, imageDimensionsX, imageDimensionsY);
+    }
+
+    context.width = imageDimensionsX;
+    context.height = imageDimensionsY;
   }
 
   function createOptions(trait, index) {
     return (
-      <>
+      <div key={index}>
         <Box>
           <Text fontSize="md" color="#ffffff">
             {trait}
@@ -51,12 +119,14 @@ function AvatarGenerator() {
               updateTrait(trait, e.target.value);
             }}
           >
-            {Object.keys(traits[trait]).map((value) => (
-              <option value={value}>{traits[trait][value]}</option>
+            {Object.keys(traits[trait]).map((value, i) => (
+              <option key={i} value={value}>
+                {traits[trait][value]}
+              </option>
             ))}
           </Select>
         </Box>
-      </>
+      </div>
     );
   }
 
@@ -68,7 +138,7 @@ function AvatarGenerator() {
             <Box {...styles.mainBox}>
               <Box>
                 <Center>
-                  <Image src="assets/avatar-generator/title.png" maxH="150px" marginBottom="30px" />
+                  <img src="assets/avatar-generator/logo.png" />
                 </Center>
               </Box>
               <div
@@ -95,21 +165,7 @@ function AvatarGenerator() {
                   }}
                 >
                   <div>
-                    <Box
-                      p={6}
-                      m={2}
-                      minWidth={300}
-                      maxWidth={300}
-                      minHeight={550}
-                      style={{
-                        'border-image-source':
-                          'linear-gradient(90deg, rgba(255,109,23,1) 0%, rgba(254,241,23,1) 50%, rgba(255,109,23,1) 100%)',
-                        'border-image-slice': '1',
-                      }}
-                      borderWidth="1px"
-                      boxShadow="0px 0px 30px #000"
-                      bg="rgba(20, 20, 20, 0.80)"
-                    >
+                    <Box {...styles.sidepanel}>
                       <Box>
                         <Heading as="h2" size="lg" color="#ffffff">
                           Customization
@@ -147,21 +203,7 @@ function AvatarGenerator() {
                     </Box>
                   </div>
                   <div>
-                    <Box
-                      p={6}
-                      m={2}
-                      minWidth={300}
-                      maxWidth="100%"
-                      minHeight={550}
-                      style={{
-                        'border-image-source':
-                          'linear-gradient(90deg, rgba(255,109,23,1) 0%, rgba(254,241,23,1) 50%, rgba(255,109,23,1) 100%)',
-                        'border-image-slice': '1',
-                      }}
-                      borderWidth="1px"
-                      boxShadow="0px 0px 30px #000"
-                      bg="rgba(20, 20, 20, 0.80)"
-                    >
+                    <Box {...styles.sidepanel}>
                       {/* the rest of the traits */}
                       {Object.keys(traits)
                         .slice(3)
@@ -173,49 +215,23 @@ function AvatarGenerator() {
                         <Button
                           {...styles.button}
                           _hover={{ filter: 'brightness(130%)' }}
-                          onClick={() => uploadCustom()}
+                          onClick={() => filePhotoRef.current.click()}
                         >
                           (Opt.) Custom Photo
                         </Button>
                       </Box>
                       <Box mb={4} display="flex" justifyContent="center" alignItems="center" mt={10}>
-                        <Button
-                          {...styles.button}
-                          _hover={{
-                            filter: 'brightness(130%)',
-                          }}
-                          onClick={() => {
-                            download();
-                          }}
-                        >
+                        <Button {...styles.button} onClick={() => download()}>
                           Download
                         </Button>
                       </Box>
                       <Box mb={4} display="flex" justifyContent="center" alignItems="center">
-                        <Button
-                          {...styles.button}
-                          _hover={{
-                            filter: 'brightness(130%)',
-                          }}
-                          onClick={() => {
-                            setRandom();
-                            generate();
-                          }}
-                        >
+                        <Button {...styles.button} onClick={() => randomizeTraits()}>
                           Randomize
                         </Button>
                       </Box>
                       <Box display="flex" justifyContent="center" alignItems="center">
-                        <Button
-                          {...styles.button}
-                          _hover={{
-                            filter: 'brightness(130%)',
-                          }}
-                          onClick={() => {
-                            reset();
-                            generate();
-                          }}
-                        >
+                        <Button {...styles.button} onClick={() => randomizeTraits()}>
                           Reset
                         </Button>
                       </Box>
@@ -232,10 +248,37 @@ function AvatarGenerator() {
 
   function onUploadPhoto(event) {
     if (event.target.files.length > 0) {
-      let img = event.target.files[0];
-      customPicture = new Image();
-      customPicture.src = URL.createObjectURL(img);
-      generate();
+      let _img = event.target.files[0];
+      const img = new Image();
+      img.src = URL.createObjectURL(_img);
+
+      setCustomPicture(img);
+    }
+  }
+
+  function randomizeTraits() {
+    setCustomPicture(null);
+
+    // randomize all traits
+    const randomTraits = {};
+    Object.keys(traits).forEach((trait) => {
+      const randomTrait = Object.keys(traits[trait])[Math.floor(Math.random() * Object.keys(traits[trait]).length)];
+      randomTraits[trait] = randomTrait;
+    });
+
+    setSelectedTrait(randomTraits);
+  }
+
+  function download() {
+    try {
+      const link = document.createElement('a');
+
+      link.download = 'Kochiken_Avatar.png';
+      link.href = canvasRef.current.toDataURL();
+
+      link.click();
+    } catch (error) {
+      console.log('Please Refresh Your Page.');
     }
   }
 }
@@ -305,6 +348,24 @@ const styles = {
     background:
       'linear-gradient(180deg, rgba(254,241,23,0.9808298319327731) 0%, rgba(255,109,23,0.958420868347339) 70%)',
     transition: '0.3s all',
+    _hover: {
+      filter: 'brightness(130%)',
+    },
+  },
+  sidepanel: {
+    p: 6,
+    m: 2,
+    minWidth: 300,
+    maxWidth: 300,
+    minHeight: 550,
+    style: {
+      'border-image-source':
+        'linear-gradient(90deg, rgba(255,109,23,1) 0%, rgba(254,241,23,1) 50%, rgba(255,109,23,1) 100%)',
+      'border-image-slice': '1',
+    },
+    borderWidth: '1px',
+    boxShadow: '0px 0px 30px #000',
+    bg: 'rgba(20, 20, 20, 0.80)',
   },
 };
 
