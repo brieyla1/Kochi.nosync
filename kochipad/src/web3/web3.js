@@ -1,11 +1,19 @@
-const Web3 = require('web3');
-const Web3Modal = require('web3modal');
+import Web3 from "web3";
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 export async function connectWallet() {
-  return;
 
   const providerOptions = {
-    /* See Provider Options Section */
+    walletconnect: {
+      package: WalletConnectProvider, // required
+      options: {
+        infuraId: "INFURA_ID" // required
+      }
+    },
+    binancechainwallet: {
+      package: true
+    }
   };
 
   const web3Modal = new Web3Modal({
@@ -19,13 +27,6 @@ export async function connectWallet() {
   const web3 = new Web3(provider);
 }
 
-export function enterWhitelabelRaffle() {
-  return;
-  // Check if Metamask is installed
-  if (typeof window.ethereum !== 'undefined') {
-    window.ethereum.request({ method: 'eth_requestAccounts' });
-  } else {
-    // Alert user that Metamask is required
-    console.log('MetaMask is not installed');
-  }
+export function isWalletConnected() {
+  return (typeof window.ethereum !== 'undefined')
 }

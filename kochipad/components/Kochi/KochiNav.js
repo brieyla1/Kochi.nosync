@@ -16,7 +16,7 @@ function KochiNav({ title, value, children: icon }) {
         </div>
         <div className="text-center max-w-2xl mt-20">
           <h2 className="uppercase dark:text-white text-3xl text-gray-800">
-            <span className="text-k-orange">Low</span> Fees. <span className="text-k-orange">No</span> Tokens Taken.
+            <span className="text-k-orange">Low</span> Fees. <span className="text-k-orange">No</span> Tokens Taken.&nbsp;
             <span className="text-k-orange">All</span> Revenue Shared
           </h2>
           <span className="dark:text-gray-300 text-xl pt-5 block text-gray-800">

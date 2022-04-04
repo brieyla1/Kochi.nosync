@@ -30,7 +30,7 @@ const routes = [
     name: 'Airdrops',
     routes: [
       {
-        path: '/app/airdrop/new',
+        path: '/airdrop/new',
         name: 'Create Airdrop',
       },
     ],
