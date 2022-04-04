@@ -28,8 +28,8 @@ function App({ Component, pageProps }) {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" href="/favicon.png"></link>
 
-        <title>Nextjs Windmill Dashboard</title>
-        <meta name="description" content="Windmill Dashboard for nextjs" />
+        <title>Kochipad Dashboard</title>
+        <meta name="description" content="Kochipad Dashboard" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.1/css/all.css" />
       </Head>
       <style jsx global>{`

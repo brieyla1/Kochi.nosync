@@ -115,6 +115,7 @@ function AvatarGenerator() {
         <Box key={index} md={5}>
           <Select
             {...styles.selectBox}
+            value={selectedTrait[trait]}
             onChange={(e) => {
               updateTrait(trait, e.target.value);
             }}
