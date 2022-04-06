@@ -1,9 +1,29 @@
-import React, { useEffect } from 'react';
+import { Button, Card, CardBody, Label } from '@windmill/react-ui';
+import moment from 'moment';
+import React from 'react';
 import { connectWallet, isWalletConnected } from '../../src/web3/web3';
-
 import PageTitle from '/components/Typography/PageTitle';
-import { Card, CardBody, Button, Label } from '@windmill/react-ui';
 import TokenImage from '/public/assets/img/catoshi.svg';
+
+const timestamp = Date.now();
+const yesterday = timestamp - 86400000;
+const timestamp_plus_one_day = timestamp + 86400000;
+
+const demo_list = [
+  { name: 'Raffle', status: 'Ended', start_time: yesterday, end_time: yesterday + 100 },
+  {
+    name: 'Round 1',
+    status: 'Active',
+    start_time: yesterday,
+    end_time: timestamp + 1000000,
+  },
+  {
+    name: 'Public Sale',
+    status: 'Waiting',
+    start_time: timestamp_plus_one_day + 86400000,
+    end_time: timestamp_plus_one_day + 86400000 + 86400000,
+  },
+];
 
 function IndividualPresale() {
   function enterWhitelabelRaffle() {
@@ -306,6 +326,34 @@ function IndividualPresale() {
                   <span className="text-k-orange mb-2 text-2xl">0.5 ETH</span>
                 </div>
               </div>
+            </CardBody>
+          </Card>
+
+          <Card className="col-span-1 mt-6">
+            <CardBody className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800 border border-gray-600 p-5">
+              <div className="grid grid-cols-3 mb-5 text-center text-gray-500 dark:text-gray-200">
+                <div>Round</div>
+                <div>Status</div>
+                <div>Time</div>
+              </div>
+              {demo_list.map((item, index) => (
+                <div className="grid grid-cols-3 my-2 text-center text-gray-500 dark:text-gray-200">
+                  <div>{item.name}</div>
+                  <div>{item.status}</div>
+                  {/* check if status is active
+                    <div className="text-green-500"> {moment(item.end_time).fromNow(true)} left</div>
+                    <div className="text-red-500">ended {moment(item.end_time).fromNow(true)}</div>
+                    <div className="text-orange-500">in {moment(item.end_time).fromNow(true)}</div>
+                  */}
+                  {item.status === 'Active' ? (
+                    <div className="text-green-500"> {moment(item.end_time).fromNow(true)}</div>
+                  ) : item.status === 'Waiting' ? (
+                    <div className="text-orange-500">{moment(item.end_time).fromNow()}</div>
+                  ) : (
+                    <div className="text-red-500">ended {moment(item.end_time).fromNow()}</div>
+                  )}
+                </div>
+              ))}
             </CardBody>
           </Card>
         </div>

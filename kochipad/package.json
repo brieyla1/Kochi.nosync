@@ -24,6 +24,7 @@
     "framer-motion": "^6.2.8",
     "graphql": "^16.3.0",
     "memoizee": "^0.4.15",
+    "moment": "^2.29.2",
     "next": "^12.1.4",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.2.14",
