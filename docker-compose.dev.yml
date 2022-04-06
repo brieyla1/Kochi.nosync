@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+  frontend:
+    image: kochi.frontend:latest
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.frontend
+    entrypoint:
+      - npm
+      - run
+      - dev
+    volumes:
+      - ./kochipad:/kochipad
+    container_name: "kochipad-frontend"
+    environment:
+      - PORT=80
+    ports:
+      - "80:80"
+
+  backend:
+    image: kochi.backend:latest
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.backend
+    entrypoint:
+      - npm
+      - run
+      - startback:dev
+    container_name: "kochipad-backend"
+    volumes:
+      - ./kochipad:/kochipad
+    environment:
+      - PORT=5050
+    ports:
+      - "5050:5050"
+
+  mongodb:
+    image: "mongo:latest"
+    container_name: "mongo"
+    ports:
+      - "27017:27017"
+    logging:
+      driver: none
+

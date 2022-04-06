@@ -1,5 +1,10 @@
+enum sort {
+  hardcap
+  startTime
+}
+
 type Query {
-  listings(showCount: Int = 30, full: Boolean = false): [Listing]
+  listings(full: Boolean = false, sort: sort): [Listing]
   listing(addr: String!): Listing
 }
 

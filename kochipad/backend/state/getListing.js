@@ -6,7 +6,7 @@ const keys = [
   'liquidityShareBP',
   'hardcap',
   'softcap',
-  'feeBP',
+  'fee',
   'startTime',
   'endTime',
   'wlStartTime',

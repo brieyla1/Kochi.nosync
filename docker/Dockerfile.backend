@@ -1,0 +1,13 @@
+FROM node:14.18.2
+
+WORKDIR /kochipad
+
+
+COPY ./kochipad/package.json ./
+
+RUN yarn
+RUN yarn global add nodemon
+
+COPY ./kochipad/ ./
+
+CMD ["npm", "run", "startback:dev"]

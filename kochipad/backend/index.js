@@ -32,7 +32,7 @@ app.get('/listings/:addr', async (req, res) => {
 // graphql
 // The root provides a resolver function for each API endpoint
 var root = {
-  listings: async ({ showCount, full }) => {
+  listings: async ({ showCount, full, sort }) => {
     const _listings = await state.functions.getListingList();
 
     // when full is true, we return at most 30 listings

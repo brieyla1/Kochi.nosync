@@ -1,0 +1,17 @@
+FROM node:14.18.2
+
+WORKDIR /kochipad
+
+COPY ./kochipad/package.json ./
+
+# next canary
+RUN yarn global add next@canary
+RUN yarn
+
+COPY ./kochipad/ ./
+
+RUN npm run build
+
+VOLUME ["/kochipad/node_modules"]
+
+CMD ["npm", "run", "dev"]

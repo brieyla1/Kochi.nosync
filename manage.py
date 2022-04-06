@@ -1,40 +1,36 @@
-# this is a simple tool to help developers run code locally
-# it will run the code in the current directory.
-# 'python manage.py run' is the command to launch services ["bot", "frontend", "backend"]
+import subprocess
+import argparse
 
-def main():
-    import sys
-    import subprocess
-    from os.path import join, dirname, realpath
 
-    if len(sys.argv) < 3:
-        print("Usage: python manage.py run [service]")
-        print("Services: bot, frontend, backend")
-        return
+def docker_compose_cli():
 
-    dirn = dirname(realpath(__file__))
+    parser = argparse.ArgumentParser(description='Docker Compose CLI')
+    parser.add_argument('-b', '--build', nargs='+',
+                        help='Build a container')
+    parser.add_argument('-d', '--dev', nargs='+',
+                        help='Run a development environment')
+    parser.add_argument('-p', '--prod', nargs='+',
+                        help='Run a production environment')
+    args = parser.parse_args()
 
-    service = sys.argv[2]
-    if service == "bot":
-        # ask for anothe argument (the subservice)
-        if len(sys.argv) < 4:
-            print("Usage: python manage.py run bot [subservice]")
-            print("Subservices: buybot")
-            return
+    if args.dev:
+        if args.build:
+            print('Building container: {}'.format(args.build))
+            subprocess.call(
+                ['docker-compose', '-f', './docker-compose.dev.yml', 'build', args.build])
+        print('Running development environment: {}'.format(args.dev))
+        subprocess.call(['docker-compose', 'up', '-d', args.dev])
+    elif args.prod:
+        if args.build:
+            print('Building container: {}'.format(args.build))
+            subprocess.call(
+                ['docker-compose', '-f', './docker-compose.yml', 'build', args.build])
+        print('Running production environment: {}'.format(args.prod))
+        subprocess.call(['docker-compose', 'up', '-d', args.prod])
 
-        subservice = sys.argv[3]
-        subprocess.run(
-            ["bash", f"startdev.sh"],
-            cwd=f"{dirn}/bots/{subservice}")
-    elif service == "frontend":
-        subprocess.run(["npm", "run", "start"], cwd=f"{dirn}/kochipad/")
-    elif service == "backend":
-        subprocess.run(["npm", "run", "startb:dev"], cwd=f"{dirn}/kochipad/")
-    elif service == "install":
-        subprocess.run(["npm", "install"], cwd=f"{dirn}/kochipad")
     else:
-        print("Unknown service: {}".format(service))
+        print('No arguments provided')
 
 
 if __name__ == "__main__":
-    main()
+    docker_compose_cli()
