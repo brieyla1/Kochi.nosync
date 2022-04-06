@@ -16,6 +16,17 @@
   - pfp generator
   - 
 
+### docker-compose
+
+using dockercompose is the easiest way to get started.
+
+make sure you have docker running, then run
+
+* Step 1:  `docker-compose --file docker-compose.dev.yml up --build`
+* Step 2: Success
+
+you can now edit both the `frontend & backend`, everything will update automatically. the docker container also launched a `mongo database`
+
 ### manage.py
 
 the manage.py file is the main entry point for the project. it has yet to be improved but it works this way:
@@ -26,7 +37,7 @@ some commands are filtered by their subservice:
 
 - 'python manage.py run bot [subservice]' is the command to launch the bots (buybot)
 
-The idea to create this is to simplify onoboarding of new freelancers on the project.
+The idea is to simplify onoboarding of new people onto the project. the manage.py uses the docker-compose stated above.
 
 ### each subprojects has their own README.md, read them if assigned a task on it.
 
