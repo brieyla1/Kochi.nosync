@@ -2,10 +2,10 @@
 
 ## Installation
 ```
-npm install
+yarn
 ```
 
 ## Start
 ```
-npm run start
+yarn run start
 ```
