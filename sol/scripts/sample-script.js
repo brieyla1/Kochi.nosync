@@ -19,7 +19,7 @@ async function main() {
   console.log('deploying master');
 
   // We get the contract to deploy
-  const Master = await hre.ethers.getContractFactory('LaunchpadMaster');
+  const Master = await hre.ethers.getContractFactory('Launchpad');
   // deploy fee = 0.1 ether
   const fee = ethers.utils.parseEther('0.1');
   const master = await Master.deploy(500, owner, user1, fee);
@@ -39,8 +39,8 @@ async function main() {
   const maxBuyPerUser = ethers.BigNumber.from('60').pow(18);
   const minBuyPerUser = ethers.BigNumber.from('1').pow(14);
   // create a 100 children
-  for (let i = 0; i < 1000; i++) {
-    const child = await master.createPresale(
+  for (let i = 0; i < 100; i++) {
+    const presale = await master.createPresale(
       token.address,
       'test-' + i,
       'presale',
