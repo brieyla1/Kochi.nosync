@@ -12,9 +12,6 @@
 
 - bots
   - buybot
-- misc
-  - pfp generator
-  - 
 
 ### docker-compose
 
