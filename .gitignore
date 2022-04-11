@@ -132,7 +132,7 @@ dmypy.json
 .deps/
 
 # Node Modules 
-/node_modules
+node_modules/
 
 # DS Store Files
 /.DS_Store
