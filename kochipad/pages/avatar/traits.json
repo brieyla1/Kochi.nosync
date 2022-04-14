@@ -1,20 +1,21 @@
 {
   "Background": {
-    "Background-Blue": "Blue",
     "Background-Bronze": "Bronze",
-    "Background-Brown": "Brown",
-    "Background-Dark-Green": "Green",
-    "Background-Dark-Purple": "Purple",
+    "Background-Dark-Green": "Dark Green",
+    "Background-Dark-Green": "Dark Purple",
+    "Background-Deep-Carrot": "Deep Carrot",
+    "Background-Eerie-Black": "Eerie Black",
     "Background-Green": "Green",
     "Background-Light-Blue": "Light Blue",
     "Background-Light-Green": "Light Green",
-    "Background-Light-Purple": "Light Purple",
-    "Background-Light-Red": "Light Red",
+    "Background-Mauvelous": "Mauvelous",
+    "Background-Maximum-Blue-Purple": "Maximum Blue Purple",
     "Background-Navy-Blue": "Navy Blue",
     "Background-Ocean-Blue": "Ocean Blue",
-    "Background-Purple": "Purple",
+    "Background-Ocre": "Ocre",
     "Background-Red": "Red",
     "Background-Turquoise": "Turquoise",
+    "Background-Yankees-Blue": "Yankees Blue",
     "Background-Yellow": "Yellow"
   },
   "Body": {
