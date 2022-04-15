@@ -1,8 +1,8 @@
-require('@nomiclabs/hardhat-waffle');
+require("@nomiclabs/hardhat-waffle");
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
-task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
+task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
   for (const account of accounts) {
@@ -10,16 +10,13 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
   }
 });
 
-const fs = require('fs');
-fs.readFileSync('../config.env')
+const fs = require("fs");
+fs.readFileSync("../config.env")
   .toString()
-  .split('\n')
+  .split("\n")
   .forEach((line) => {
-    const [key, value] = line.split('=');
-    if (key && value) {
-      console.log(line);
-      process.env[key] = value;
-    }
+    const [key, value] = line.split("=");
+    if (key && value) process.env[key] = value;
   });
 
 /**
@@ -27,7 +24,7 @@ fs.readFileSync('../config.env')
  */
 module.exports = {
   solidity: {
-    version: '0.8.7',
+    version: "0.8.7",
     settings: {
       optimizer: {
         enabled: true,

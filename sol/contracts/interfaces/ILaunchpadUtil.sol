@@ -23,14 +23,16 @@ interface ILaunchpadUtil {
     uint256 listingTokensPerOneBaseCurrency;
     uint256 hardcap;
     uint256 softcap;
-    uint256 transactionFees;
     uint256 tokensPerOneBaseCurrency;
-    uint256 liquidityShare;
-    uint256 liquidityUnlockTimestamp;
+    uint64 liquidityUnlockPercentage;
+    uint64 liquidityUnlockTimestamp;
+    uint64 liquidityUnlockEndTimestamp;
     uint256 maxBuyPerUser;
     uint256 minBuyPerUser;
     uint256 tokenAmountForSale;
     uint256 tokenAmountForLiquidity;
+    uint64 publicSaleTimestamp;
+    uint64 publicSaleEndTimestamp;
   }
 
   struct SDescription {
@@ -39,22 +41,17 @@ interface ILaunchpadUtil {
     string imageUrl;
     uint256 saleId;
     address token;
+    uint256 transactionFees;
     address feeBeneficiary;
     address signer;
     address owner;
-    SRouter router;
-  }
-
-  struct STokenomics {
-    bool saleStarted;
-    bool saleEnded;
     bool saleAborted;
+    SRouter router;
   }
 
   struct SLaunchpadExport {
     SInput input;
     SDescription description;
-    STokenomics tokenomics;
   }
 
   struct SRound {

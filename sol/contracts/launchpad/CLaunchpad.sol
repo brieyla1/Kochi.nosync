@@ -10,6 +10,9 @@ import "contracts/interfaces/ILaunchpad.sol";
 import "contracts/launchpad/CPresale.sol";
 import "contracts/interfaces/ILaunchpadUtil.sol";
 
+// console
+import "hardhat/console.sol";
+
 contract Launchpad is Ownable, ReentrancyGuard, Pausable {
   event Deployed(address addr, uint256 salt);
 
@@ -24,6 +27,8 @@ contract Launchpad is Ownable, ReentrancyGuard, Pausable {
   address payable public feesWallet;
   Presale public presale;
   address public presale_address;
+
+  event SaleCreated(uint256 sale_id, address sale_address);
 
   constructor(
     uint256 _transaction_fees,
@@ -53,18 +58,35 @@ contract Launchpad is Ownable, ReentrancyGuard, Pausable {
 
     presale = new Presale(
       financials,
-      ILaunchpadUtil.SDescription(_name, _description, _imageUrl, current_sale_id, _token, feesWallet, msg.sender, owner(), router),
+      ILaunchpadUtil.SDescription(
+        _name,
+        _description,
+        _imageUrl,
+        current_sale_id,
+        _token,
+        transaction_fee,
+        feesWallet,
+        msg.sender,
+        owner(),
+        false,
+        router
+      ),
       rounds
     );
+    saleAddress = address(presale);
+
+    // transfer the erc20 tokens
+    IERC20(_token).transferFrom(msg.sender, saleAddress, financials.tokenTotalAmount);
 
     // Update the registry
-    presale_address = address(presale);
     ILaunchpadUtil.SSale memory sale = ILaunchpadUtil.SSale(_name, current_sale_id, presale_address);
 
     sale_id_to_sale[current_sale_id] = sale;
     current_sale_id = current_sale_id + 1;
 
-    return (saleAddress);
+    emit SaleCreated(current_sale_id, saleAddress);
+
+    return saleAddress;
   }
 
   // return a list of Sales
