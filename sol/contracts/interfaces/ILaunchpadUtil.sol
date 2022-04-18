@@ -52,6 +52,8 @@ interface ILaunchpadUtil {
   struct SLaunchpadExport {
     SInput input;
     SDescription description;
+    address vesting_wallet;
+    SRound[] rounds;
   }
 
   struct SRound {

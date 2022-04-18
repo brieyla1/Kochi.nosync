@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
-import "contracts/interfaces/ILaunchpad.sol";
 import "contracts/launchpad/CPresale.sol";
 import "contracts/interfaces/ILaunchpadUtil.sol";
 
