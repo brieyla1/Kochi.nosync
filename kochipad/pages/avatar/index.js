@@ -1,24 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import {
-  ChakraProvider,
-  extendTheme,
-  Center,
-  SimpleGrid,
-  Box,
-  Button,
-  Divider,
-  Heading,
-  Select,
-  Text,
-} from '@chakra-ui/react';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChakraProvider, extendTheme, Center, SimpleGrid, Box, Button, Divider, Heading, Select, Text } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
-import traits from './traits.json';
+import traits from "./traits.json";
 
 const theme = extendTheme({
   config: {
-    initialColorMode: 'dark',
+    initialColorMode: "dark",
   },
 });
 
@@ -57,9 +46,11 @@ function AvatarGenerator() {
     const loadImage = (trait) =>
       new Promise((resolve, reject) => {
         let img = new Image();
-        img.setAttribute('crossOrigin', 'anonymous');
+        img.setAttribute("crossOrigin", "anonymous");
         img.onload = () => resolve(img);
-        img.src = 'assets/avatar-generator/traits/' + selectedTrait[trait] + '.png';
+        if (selectedTrait[trait] != undefined) {
+          img.src = "assets/avatar-generator/traits/" + selectedTrait[trait] + ".png";
+        }
       });
 
     // load all images
@@ -70,7 +61,7 @@ function AvatarGenerator() {
   }
 
   function buildAvatar() {
-    const context = canvasRef.current.getContext('2d');
+    const context = canvasRef.current.getContext("2d");
     context.clearRect(0, 0, imageDimensionsX, imageDimensionsY);
 
     if (customPicture !== null) {
@@ -81,9 +72,9 @@ function AvatarGenerator() {
         imageDimensionsX - customPicturePadding,
         imageDimensionsY - customPicturePadding
       );
-      context.globalCompositeOperation = 'destination-in';
+      context.globalCompositeOperation = "destination-in";
 
-      context.fillStyle = '#000';
+      context.fillStyle = "#000";
       context.beginPath();
       context.arc(
         imageDimensionsX * 0.5, // x
@@ -93,9 +84,9 @@ function AvatarGenerator() {
         2 * Math.PI // end angle
       );
       context.fill();
-      context.globalCompositeOperation = 'source-over';
+      context.globalCompositeOperation = "source-over";
 
-      context.drawImage(current_traits['Circle'], 0, 0, imageDimensionsX, imageDimensionsY);
+      context.drawImage(current_traits["Circle"], 0, 0, imageDimensionsX, imageDimensionsY);
     } else {
       for (const trait in traits) context.drawImage(current_traits[trait], 0, 0, imageDimensionsX, imageDimensionsY);
     }
@@ -144,25 +135,25 @@ function AvatarGenerator() {
               </Box>
               <div
                 style={{
-                  display: 'flex',
-                  flexFlow: 'row wrap',
-                  borderRadius: 'lg',
-                  border: '1px',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  alignItems: 'stretch',
-                  width: 'auto',
+                  display: "flex",
+                  flexFlow: "row wrap",
+                  borderRadius: "lg",
+                  border: "1px",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "stretch",
+                  width: "auto",
                 }}
               >
                 <div
                   style={{
-                    display: 'flex',
-                    flexFlow: 'row wrap',
-                    borderRadius: 'lg',
-                    border: '1px',
-                    justifyContent: 'center',
-                    flexDirection: 'wrap',
-                    alignItems: 'stretch',
+                    display: "flex",
+                    flexFlow: "row wrap",
+                    borderRadius: "lg",
+                    border: "1px",
+                    justifyContent: "center",
+                    flexDirection: "wrap",
+                    alignItems: "stretch",
                   }}
                 >
                   <div>
@@ -179,8 +170,7 @@ function AvatarGenerator() {
                         <Divider borderColor="#ffffff" mt={1} />
                       </Box>
                       <Text fontSize="sm" color="#ffffff" mb={5}>
-                        Join The Kochi Clan Today! Generate your own custom profile picture and wear it on all your
-                        socials!
+                        Join The Kochi Clan Today! Generate your own custom profile picture and wear it on all your socials!
                       </Text>
                       {Object.keys(traits)
                         .slice(0, 3)
@@ -200,7 +190,7 @@ function AvatarGenerator() {
                         </Heading>
                         <Divider borderColor="#ffffff" mt={1} />
                       </Box>
-                      <canvas ref={canvasRef} width="512" height="512" style={{ transform: 'scale(0.7)' }} />
+                      <canvas ref={canvasRef} width="512" height="512" style={{ transform: "scale(0.7)" }} />
                     </Box>
                   </div>
                   <div>
@@ -212,12 +202,8 @@ function AvatarGenerator() {
 
                       {/* download and other custom buttons */}
                       <Box mb={4} display="flex" justifyContent="center" alignItems="center" mt={10}>
-                        <input type="file" style={{ display: 'none' }} onChange={onUploadPhoto} ref={filePhotoRef} />
-                        <Button
-                          {...styles.button}
-                          _hover={{ filter: 'brightness(130%)' }}
-                          onClick={() => filePhotoRef.current.click()}
-                        >
+                        <input type="file" style={{ display: "none" }} onChange={onUploadPhoto} ref={filePhotoRef} />
+                        <Button {...styles.button} _hover={{ filter: "brightness(130%)" }} onClick={() => filePhotoRef.current.click()}>
                           (Opt.) Custom Photo
                         </Button>
                       </Box>
@@ -272,14 +258,14 @@ function AvatarGenerator() {
 
   function download() {
     try {
-      const link = document.createElement('a');
+      const link = document.createElement("a");
 
-      link.download = 'Kochiken_Avatar.png';
+      link.download = "Kochiken_Avatar.png";
       link.href = canvasRef.current.toDataURL();
 
       link.click();
     } catch (error) {
-      console.log('Please Refresh Your Page.');
+      console.log("Please Refresh Your Page.");
     }
   }
 }
@@ -287,70 +273,68 @@ function AvatarGenerator() {
 // reduce repetition
 const styles = {
   mainBox: {
-    display: 'flex',
-    borderRadius: 'lg',
+    display: "flex",
+    borderRadius: "lg",
     border: 1,
-    overflow: 'visible',
-    justifyContent: 'flex-start',
-    flexDirection: 'column',
-    alignItems: 'stretch',
+    overflow: "visible",
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    alignItems: "stretch",
     p: 5,
     ml: 5,
     mr: 5,
     mt: 5,
   },
   appStyle: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     backgroundImage: `url('assets/avatar-generator/background.png')`,
-    width: '100vw',
-    height: '100vh',
-    zIndex: '-1',
-    backgroundAttachment: 'fixed',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    position: 'fixed',
-    overflowY: 'auto',
-    fontFamily: 'Mukta',
-    fontWeight: '1000',
+    width: "100vw",
+    height: "100vh",
+    zIndex: "-1",
+    backgroundAttachment: "fixed",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    position: "fixed",
+    overflowY: "auto",
+    fontFamily: "Mukta",
+    fontWeight: "1000",
   },
   canvadBox: {
     p: 6,
     m: 2,
     minWidth: 300,
-    maxWidth: '100%',
+    maxWidth: "100%",
     minHeight: 550,
     style: {
-      'border-image-source':
-        'linear-gradient(90deg, rgba(255,109,23,1) 0%, rgba(254,241,23,1) 50%, rgba(255,109,23,1) 100%)',
-      'border-image-slice': '1',
+      borderImageSource: "linear-gradient(90deg, rgba(255,109,23,1) 0%, rgba(254,241,23,1) 50%, rgba(255,109,23,1) 100%)",
+      borderImageSlice: "1",
     },
-    borderWidth: '1px',
-    boxShadow: '0px 0px 30px #000',
-    bg: 'rgba(20, 20, 20, 0.80)',
+    borderWidth: "1px",
+    boxShadow: "0px 0px 30px #000",
+    bg: "rgba(20, 20, 20, 0.80)",
   },
   selectBox: {
     icon: <ChevronDownIcon />,
-    variant: 'outline',
-    size: 'md',
-    color: '#fff',
-    iconColor: '#ff6d17',
-    borderColor: '#ffffff',
-    focusBorderColor: '#ff6d17',
+    variant: "outline",
+    size: "md",
+    color: "#fff",
+    iconColor: "#ff6d17",
+    borderColor: "#ffffff",
+    focusBorderColor: "#ff6d17",
   },
   button: {
-    variant: 'solid',
-    size: 'md',
-    textAlign: 'left',
-    display: 'flex',
+    variant: "solid",
+    size: "md",
+    textAlign: "left",
+    display: "flex",
     minWidth: 250,
-    color: 'black',
-    textTransform: 'uppercase',
-    background:
-      'linear-gradient(180deg, rgba(254,241,23,0.9808298319327731) 0%, rgba(255,109,23,0.958420868347339) 70%)',
-    transition: '0.3s all',
+    color: "black",
+    textTransform: "uppercase",
+    background: "linear-gradient(180deg, rgba(254,241,23,0.9808298319327731) 0%, rgba(255,109,23,0.958420868347339) 70%)",
+    transition: "0.3s all",
     _hover: {
-      filter: 'brightness(130%)',
+      filter: "brightness(130%)",
     },
   },
   sidepanel: {
@@ -360,13 +344,12 @@ const styles = {
     maxWidth: 300,
     minHeight: 550,
     style: {
-      'border-image-source':
-        'linear-gradient(90deg, rgba(255,109,23,1) 0%, rgba(254,241,23,1) 50%, rgba(255,109,23,1) 100%)',
-      'border-image-slice': '1',
+      borderImageSource: "linear-gradient(90deg, rgba(255,109,23,1) 0%, rgba(254,241,23,1) 50%, rgba(255,109,23,1) 100%)",
+      "borderImageSlice?": "1",
     },
-    borderWidth: '1px',
-    boxShadow: '0px 0px 30px #000',
-    bg: 'rgba(20, 20, 20, 0.80)',
+    borderWidth: "1px",
+    boxShadow: "0px 0px 30px #000",
+    bg: "rgba(20, 20, 20, 0.80)",
   },
 };
 
