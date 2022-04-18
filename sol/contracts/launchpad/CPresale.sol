@@ -54,7 +54,7 @@ contract Presale is Pausable {
     require(input.minBuyPerUser > 0 && input.maxBuyPerUser > 0, "The user cannot buy less than 0");
     require(input.minBuyPerUser <= input.maxBuyPerUser, "The user cannot buy more than the maxBuyPerUser");
     require(
-      input.tokenAmountForLiquidity / input.listingTokensPerOneBaseCurrency < ((input.hardcap * (10000 - description.transactionFees)) / 10000),
+      input.tokenAmountForLiquidity / input.tokensPerOneBaseCurrency < ((input.hardcap * (10000 - description.transactionFees)) / 10000),
       "the listing tokens liquidity must be less than the hardcap * (10000 - (transactionFees)) / 10000, this is to ensure that there is enough liquidity."
     );
     require(input.tokenAmountForSale + input.tokenAmountForLiquidity <= input.hardcap, "The total amount for sale must be less than the hardcap");
@@ -104,11 +104,8 @@ contract Presale is Pausable {
     uint256 fees = totalBuyAmount * (description.transactionFees / 1000);
     uint256 total = totalBuyAmount - fees;
 
-    payable(msg.sender).transfer((total * (100 - input.liquidityUnlockPercentage)) / 100);
-    payable(vesting_wallet).transfer((input.liquidityUnlockPercentage * total) / 100);
-
+    payable(vesting_wallet).transfer(total);
     payable(address(master)).transfer(fees);
-
     totalBuyAmount = 0;
   }
 

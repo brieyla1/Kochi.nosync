@@ -248,10 +248,13 @@ describe("Launchpad tests", async () => {
     // some liquidity should already have been paid
     balance = await ethers.provider.getBalance(owner.address);
     await presale.connect(owner).signer_claim();
-    expect(await ethers.provider.getBalance(owner.address)).to.be.above(balance);
+    // the vesting address is now available
     await expect(presale.vesting_wallet()).to.not.be.undefined;
 
     // presale contract's balance should be 0
     expect(await ethers.provider.getBalance(presale.address)).to.be.equal(0);
+
+    // can't withdraw again
+    await expect(presale.connect(owner).signer_claim()).to.be.reverted;
   });
 });
