@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/finance/VestingWalletUpgradeable.sol
 /**
  * @title Provides a base implementation of the vesting wallet to be used by `VestingFactory`
  */
-contract VestingBase is VestingWalletUpgradeable {
+contract VestingWallet is VestingWalletUpgradeable {
   constructor() initializer {
     return;
   }

@@ -47,6 +47,7 @@ interface ILaunchpadUtil {
     address owner;
     bool saleAborted;
     SRouter router;
+    address VestingFactory;
   }
 
   struct SLaunchpadExport {

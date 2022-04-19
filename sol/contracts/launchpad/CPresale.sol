@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
-// import "@openzeppelin/contracts/finance/VestingWallet.sol";
+import "contracts/vesting/IVestingFactory.sol";
 import "contracts/interfaces/ILaunchpadUtil.sol";
 
 import "hardhat/console.sol";
@@ -28,7 +28,7 @@ contract Presale is Pausable {
   // tracker of the presale transactions
   mapping(address => uint256) public userBuyAmount;
   uint256 public totalBuyAmount = 0;
-  address vesting_wallet;
+  address public vesting_wallet;
 
   constructor(
     ILaunchpadUtil.SInput memory _input,
@@ -65,42 +65,42 @@ contract Presale is Pausable {
     );
   }
 
-  // function describe() public view returns (ILaunchpadUtil.SLaunchpadExport memory export) {
-  //   export.input = input;
-  //   export.description = description;
-  //   export.vesting_wallet = vesting_wallet;
-  //   export.rounds = get_rounds();
+  function describe() public view returns (ILaunchpadUtil.SLaunchpadExport memory export) {
+    export.input = input;
+    export.description = description;
+    export.vesting_wallet = vesting_wallet;
+    export.rounds = get_rounds();
 
-  //   return export;
-  // }
+    return export;
+  }
 
-  // function get_rounds() public view returns (ILaunchpadUtil.SRound[] memory _rounds) {
-  //   _rounds = new ILaunchpadUtil.SRound[](round_count + 2);
-  //   ILaunchpadUtil.SRound memory starting_round = getStatingRound();
+  function get_rounds() public view returns (ILaunchpadUtil.SRound[] memory _rounds) {
+    _rounds = new ILaunchpadUtil.SRound[](round_count + 2);
+    ILaunchpadUtil.SRound memory starting_round = getStatingRound();
 
-  //   address[] memory empty_array;
+    address[] memory empty_array;
 
-  //   ILaunchpadUtil.SRound memory publicSale = ILaunchpadUtil.SRound({
-  //     startTime: input.publicSaleTimestamp,
-  //     endTime: input.publicSaleEndTimestamp,
-  //     whitelisted: empty_array
-  //   });
+    ILaunchpadUtil.SRound memory publicSale = ILaunchpadUtil.SRound({
+      startTime: input.publicSaleTimestamp,
+      endTime: input.publicSaleEndTimestamp,
+      whitelisted: empty_array
+    });
 
-  //   ILaunchpadUtil.SRound memory raffle = ILaunchpadUtil.SRound({
-  //     startTime: starting_round.startTime - raffle_duration,
-  //     endTime: starting_round.startTime,
-  //     whitelisted: empty_array
-  //   });
+    ILaunchpadUtil.SRound memory raffle = ILaunchpadUtil.SRound({
+      startTime: starting_round.startTime - raffle_duration,
+      endTime: starting_round.startTime,
+      whitelisted: empty_array
+    });
 
-  //   _rounds[0] = publicSale;
-  //   _rounds[1] = raffle;
+    _rounds[0] = publicSale;
+    _rounds[1] = raffle;
 
-  //   for (uint256 i = 0; i < round_count; i++) {
-  //     _rounds[i + 2] = rounds[i];
-  //   }
+    for (uint256 i = 0; i < round_count; i++) {
+      _rounds[i + 2] = rounds[i];
+    }
 
-  //   return _rounds;
-  // }
+    return _rounds;
+  }
 
   // buy tokens
   function buy() public payable {
@@ -128,13 +128,16 @@ contract Presale is Pausable {
     description.saleAborted = true;
   }
 
-  function signer_claim() public onlySigner {
+  function signer_claim() public onlySigner returns (address) {
     require(description.signer == msg.sender, "The user is not the signer");
     require(description.saleAborted == false && getRoundIndex() == 1001, "The sale has not finished properly");
     require(totalBuyAmount >= input.softcap, "The user cannot claim the tokens if the softcap has not been reached");
 
-    VestingWallet _vesting_wallet = new VestingWallet(msg.sender, input.liquidityUnlockTimestamp, input.liquidityUnlockEndTimestamp);
-    vesting_wallet = address(_vesting_wallet);
+    vesting_wallet = IVestingFactory(description.VestingFactory).createVestingSchedule(
+      msg.sender,
+      input.liquidityUnlockTimestamp,
+      input.liquidityUnlockEndTimestamp - input.liquidityUnlockTimestamp
+    );
 
     // description.transactionFees / 1000
     uint256 fees = totalBuyAmount * (description.transactionFees / 1000);
@@ -143,6 +146,8 @@ contract Presale is Pausable {
     payable(vesting_wallet).transfer(total);
     payable(master).transfer(fees);
     totalBuyAmount = 0;
+
+    return vesting_wallet;
   }
 
   function whitelist(address[] memory addrs, uint256 round) public signerOrOwner {

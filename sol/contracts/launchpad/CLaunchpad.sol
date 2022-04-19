@@ -26,18 +26,21 @@ contract Launchpad is Ownable, ReentrancyGuard, Pausable {
   address payable public feesWallet;
   Presale public presale;
   address public presale_address;
+  address public vesting_factory;
 
   event SaleCreated(uint256 sale_id, address sale_address);
 
   constructor(
     uint256 _transaction_fees,
     uint256 _presale_creation_fee,
-    address _feesWallet
+    address _feesWallet,
+    address _vesting_factory
   ) {
     presale_creation_fee = _presale_creation_fee;
     transaction_fee = _transaction_fees;
     feesWallet = payable(_feesWallet);
     signer = msg.sender;
+    vesting_factory = _vesting_factory;
 
     current_sale_id = 0;
   }
@@ -68,7 +71,8 @@ contract Launchpad is Ownable, ReentrancyGuard, Pausable {
         msg.sender,
         owner(),
         false,
-        router
+        router,
+        vesting_factory
       ),
       rounds
     );

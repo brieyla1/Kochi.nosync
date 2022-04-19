@@ -2,18 +2,28 @@ const { expect } = require("chai");
 const { ethers, network } = require("hardhat");
 
 describe("Launchpad tests", async () => {
-  let master, owner, acc1, acc2, acc3, launchpad, presale, token;
+  let master, owner, acc1, acc2, acc3, launchpad, presale, token, vesting_wallet;
   const fee = ethers.utils.parseEther("0.1");
 
   before(async () => {
     [master, owner, acc1, acc2, acc3] = await ethers.getSigners();
   });
 
+  it("deploying the vesting service", async () => {
+    const vestingFactory = await ethers.getContractFactory("VestingFactory");
+    vesting_wallet = await vestingFactory.deploy();
+    await vesting_wallet.deployed();
+    vesting_wallet = vesting_wallet.address;
+
+    expect(vesting_wallet).to.be.a("string");
+  });
+
   it("deploy the launchpad", async () => {
     console.log("Starting deployement of the Launchpad Contract");
 
     const Launchpad = await hre.ethers.getContractFactory("Launchpad");
-    launchpad = await Launchpad.deploy(50, fee, master.address);
+    console.log(vesting_wallet);
+    launchpad = await Launchpad.deploy(50, fee, master.address, vesting_wallet);
 
     await launchpad.deployed();
 
