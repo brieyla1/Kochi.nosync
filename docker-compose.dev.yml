@@ -36,10 +36,43 @@ services:
       - "5050:5050"
 
   mongodb:
-    image: "mongo:latest"
+    image: kochi.mongo:latest
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.mongo
     container_name: "mongo"
     ports:
       - "27017:27017"
+    volumes:
+      - ~/mongors/data1:/data/db
+    networks:
+      - mongors-network
+    restart: always
+    entrypoint:
+      [
+        "/usr/bin/mongod",
+        "--bind_ip_all",
+        "--replSet",
+        "dbrs"
+      ]
     logging:
       driver: none
 
+  # TODO: this needs to be merged with the backend
+  extensionapi:
+    image: kochi.extensionapi:latest
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.extensionapi
+    container_name: "extensionapi"
+    volumes:
+      - ./misc/extension_api/:/kochi/extensionapi/
+    ports:
+      - 3232:3232
+    entrypoint:
+      [ "uvicorn", "src.main:app", "--port=3232",  "--reload" ]
+
+
+networks:
+  mongors-network:
+    driver: bridge

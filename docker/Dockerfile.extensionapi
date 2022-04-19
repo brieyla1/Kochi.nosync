@@ -1,0 +1,10 @@
+# TODO: merge with backend
+FROM python:latest
+
+WORKDIR /kochi/extensionapi/
+
+COPY misc/extension_api .
+
+RUN pip install -r requirements.txt
+
+ENTRYPOINT [ "uvicorn", "src.main:app", "--port=3232",  "--reload"]

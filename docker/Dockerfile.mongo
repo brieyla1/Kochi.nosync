@@ -1,0 +1,7 @@
+FROM mongo:latest
+
+WORKDIR /kochi/mongo/
+COPY database/ database/
+
+RUN chmod -R 755 database/
+RUN database/rs-init.sh
