@@ -260,7 +260,7 @@ function AvatarGenerator() {
     try {
       const link = document.createElement("a");
 
-      link.download = "Kochiken_Avatar.png";
+      link.download = "KochiKen_Avatar.png";
       link.href = canvasRef.current.toDataURL();
 
       link.click();
