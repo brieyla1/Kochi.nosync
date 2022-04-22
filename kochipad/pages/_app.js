@@ -28,8 +28,8 @@ function App({ Component, pageProps }) {
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" href="/favicon.png"></link>
 
-        <title>Kochipad Dashboard</title>
-        <meta name="description" content="Kochipad Dashboard" />
+        <title>Kochi Ken Profile Pic Generator</title>
+        <meta name="description" content="Kochi Ken Profile Pic Generator" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.1/css/all.css" />
       </Head>
       <style jsx global>{`
