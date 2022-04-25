@@ -170,7 +170,7 @@ function AvatarGenerator() {
                         <Divider borderColor="#ffffff" mt={1} />
                       </Box>
                       <Text fontSize="sm" color="#ffffff" mb={5}>
-                        Join The Kochi Clan Today! Generate your own custom profile picture and wear it on all your socials!
+                        Join the Kochi Fam Today!
                       </Text>
                       {Object.keys(traits)
                         .slice(0, 3)
