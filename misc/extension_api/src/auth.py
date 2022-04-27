@@ -5,7 +5,6 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta
 
 
-
 class AuthHandler():
     security = HTTPBearer()
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -34,7 +33,8 @@ class AuthHandler():
             payload = jwt.decode(token, self.secret, algorithms=['HS256'])
             return payload['sub']
         except jwt.ExpiredSignatureError:
-            raise HTTPException(status_code=401, detail='Signature has expired')
+            raise HTTPException(
+                status_code=401, detail='Signature has expired')
         except jwt.InvalidTokenError as e:
             raise HTTPException(status_code=401, detail='Invalid token')
 

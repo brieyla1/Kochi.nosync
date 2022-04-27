@@ -1,38 +1,52 @@
 from pymongo.mongo_client import MongoClient
 from bson.json_util import dumps
-import json 
+import json
 
 
 class kochi_Dataprovider():
-    def __init__(self, connectionString,client):
-        
-        self.client     = client['kochi']
-        self.whitelist  = json.loads(dumps(self.client['testWhitelist'].find({}, {'_id': False})))
-        self.blacklist  = json.loads(dumps(self.client['blacklist'].find({}, {'_id': False})))
-        self.urls       = json.loads(dumps(self.client['testWhitelist'].distinct('hp')))
-        self.cmc        = json.loads(dumps(self.client['coinmarketcap'].find({}, {'_id': False})))
-        self.cg         = json.loads(dumps(self.client['coingeko'].find({}, {'_id': False})))
-        self.exchanges  = json.loads(dumps((self.client['exchanges'].find({}, {'_id': False}))))
-        self.log        = json.loads(dumps((self.client['LOG'].find({}, {'_id': False}))))
+    def __init__(self, connectionString, client):
+
+        self.client = client['kochi']
+        self.whitelist = json.loads(
+            dumps(self.client['testWhitelist'].find({}, {'_id': False})))
+        self.blacklist = json.loads(
+            dumps(self.client['blacklist'].find({}, {'_id': False})))
+        self.urls = json.loads(
+            dumps(self.client['testWhitelist'].distinct('hp')))
+        self.cmc = json.loads(
+            dumps(self.client['coinmarketcap'].find({}, {'_id': False})))
+        self.cg = json.loads(
+            dumps(self.client['coingeko'].find({}, {'_id': False})))
+        self.exchanges = json.loads(
+            dumps((self.client['exchanges'].find({}, {'_id': False}))))
+        self.log = json.loads(
+            dumps((self.client['LOG'].find({}, {'_id': False}))))
 
         self.version, self.date = list(self.client['manifest'].find(
-                    {}, {'_id': False}))[0].values()
-        
+            {}, {'_id': False}))[0].values()
 
     def updateAllData(self):
-        self.whitelist  = json.loads(dumps(self.client['testWhitelist'].find({}, {'_id': False})))
-        self.blacklist  = json.loads(dumps(self.client['blacklist'].find({}, {'_id': False})))
-        self.urls       = json.loads(dumps(self.client['testWhitelist'].distinct('hp')))
-        self.cmc        = json.loads(dumps(self.client['coinmarketcap'].find({}, {'_id': False})))
-        self.cg         = json.loads(dumps(self.client['coingeko'].find({}, {'_id': False})))
-        self.exchanges  = json.loads(dumps((self.client['exchanges'].find({}, {'_id': False}))))
-        self.log        = json.loads(dumps((self.client['LOG'].find({}, {'_id': False}))))
+        self.whitelist = json.loads(
+            dumps(self.client['testWhitelist'].find({}, {'_id': False})))
+        self.blacklist = json.loads(
+            dumps(self.client['blacklist'].find({}, {'_id': False})))
+        self.urls = json.loads(
+            dumps(self.client['testWhitelist'].distinct('hp')))
+        self.cmc = json.loads(
+            dumps(self.client['coinmarketcap'].find({}, {'_id': False})))
+        self.cg = json.loads(
+            dumps(self.client['coingeko'].find({}, {'_id': False})))
+        self.exchanges = json.loads(
+            dumps((self.client['exchanges'].find({}, {'_id': False}))))
+        self.log = json.loads(
+            dumps((self.client['LOG'].find({}, {'_id': False}))))
 
         self.version, self.date = list(self.client['manifest'].find(
-                    {}, {'_id': False}))[0].values()
-    
+            {}, {'_id': False}))[0].values()
+
     def getWhitelist(self):
-        version, date = list(self.client['manifest'].find({}, {'_id': False}))[0].values()
+        version, date = list(self.client['manifest'].find(
+            {}, {'_id': False}))[0].values()
 
         if self.version == version:
             return self.whitelist
@@ -42,7 +56,8 @@ class kochi_Dataprovider():
             return self.whitelist
 
     def getBlacklist(self):
-        version, date = list(self.client['manifest'].find({}, {'_id': False}))[0].values()
+        version, date = list(self.client['manifest'].find(
+            {}, {'_id': False}))[0].values()
 
         if self.version == version:
             return self.blacklist
@@ -52,7 +67,8 @@ class kochi_Dataprovider():
             return self.blacklist
 
     def getUrls(self):
-        version, date = list(self.client['manifest'].find({}, {'_id': False}))[0].values()
+        version, date = list(self.client['manifest'].find(
+            {}, {'_id': False}))[0].values()
 
         if self.version == version:
             return self.urls
@@ -62,7 +78,8 @@ class kochi_Dataprovider():
             return self.urls
 
     def getCMC(self):
-        version, date = list(self.client['manifest'].find({}, {'_id': False}))[0].values()
+        version, date = list(self.client['manifest'].find(
+            {}, {'_id': False}))[0].values()
 
         if self.version == version:
             return self.cmc
@@ -72,7 +89,8 @@ class kochi_Dataprovider():
             return self.cmc
 
     def getCG(self):
-        version, date = list(self.client['manifest'].find({}, {'_id': False}))[0].values()
+        version, date = list(self.client['manifest'].find(
+            {}, {'_id': False}))[0].values()
 
         if self.version == version:
             return self.cg
@@ -82,7 +100,8 @@ class kochi_Dataprovider():
             return self.cg
 
     def getExchanges(self):
-        version, date = list(self.client['manifest'].find({}, {'_id': False}))[0].values()
+        version, date = list(self.client['manifest'].find(
+            {}, {'_id': False}))[0].values()
 
         if self.version == version:
             return self.exchanges
@@ -92,7 +111,8 @@ class kochi_Dataprovider():
             return self.exchanges
 
     def getLOG(self):
-        version, date = list(self.client['manifest'].find({}, {'_id': False}))[0].values()
+        version, date = list(self.client['manifest'].find(
+            {}, {'_id': False}))[0].values()
 
         if self.version == version:
             return self.exchanges
@@ -100,7 +120,3 @@ class kochi_Dataprovider():
         else:
             self.updateAllData()
             return self.exchanges
-        
-
-
-

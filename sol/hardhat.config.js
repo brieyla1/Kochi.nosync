@@ -10,13 +10,14 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   }
 });
 
+let env = {};
 const fs = require("fs");
 fs.readFileSync("../config.env")
   .toString()
   .split("\n")
   .forEach((line) => {
     const [key, value] = line.split("=");
-    if (key && value) process.env[key] = value;
+    if (key && value) env[key] = value.includes(",") ? value.split(",") : value;
   });
 
 /**
@@ -36,7 +37,7 @@ module.exports = {
   networks: {
     rinkeby: {
       url: `https://eth-rinkeby.alchemyapi.io/v2/wESK28uC2bhbARFkT_vl5GSzbklbOeKd`,
-      accounts: [process.env.PRIVATE_KEY],
+      accounts: env.HARDHAT_PRIVATE_KEYS,
     },
   },
 };
