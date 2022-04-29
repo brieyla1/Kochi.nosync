@@ -2,7 +2,7 @@
   "Background": {
     "Background-Bronze": "Bronze",
     "Background-Dark-Green": "Dark Green",
-    "Background-Dark-Green": "Dark Purple",
+    "Background-Dark-Purple": "Dark Purple",
     "Background-Deep-Carrot": "Deep Carrot",
     "Background-Eerie-Black": "Eerie Black",
     "Background-Green": "Green",
@@ -21,7 +21,6 @@
     "body-black": "Black",
     "body-black-white-gradient": "Black & White Gradient",
     "body-brown": "Brown",
-    "body-fire": "Fire",
     "body-grey": "Grey",
     "body-lightgrey-grey-black": "Light Grey & Black",
     "body-purple": "Purple",
@@ -87,8 +86,6 @@
     "knot-scarf-grey": "Grey Knot Scarf",
     "knot-scarf-purple": "Purple Knot Scarf",
     "knot-scarf-red": "Red Knot Scarf",
-    "rogue-high-collar-blue": "Blue Rogue High-Collar",
-    "rogue-streetwear-black-orange": "Black & Orange Rogue Streetwear",
     "spiked-choker": "Spiked Choker",
     "baggy-top-black": "Black Baggy Top",
     "baggy-top-blue": "Blue Baggy Top",
@@ -106,7 +103,6 @@
     "chinese-traditional-white": "White Chinese Traditional",
     "cyber-cat-hoodie": "Cyber Cat Hoodie",
     "cyber-hoodie-pink": "Cyber Hoodie Pink",
-    "cyber-pendant-blue": "Cyber Pendant Blue",
     "formal-black-shirt-grey-tie": "Black Shirt & Grey Tie",
     "formal-black-shirt-purple-tie": "Black Shirt & Purple Tie",
     "formal-black-shirt-white-tie": "Black Shirt & White Tie",
@@ -143,7 +139,6 @@
     "kimono-red": "Red Kimono"
   },
   "Circle": {
-    "Circle": "🔥 Kochi Fam 🔥",
     "circle-black": "Black",
     "circle-blue": "Blue",
     "circle-green": "Green",
