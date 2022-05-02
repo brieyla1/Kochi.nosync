@@ -102,6 +102,7 @@ async function main() {
 
   presale_address = receipt.events.filter((e) => e.event === "SaleCreated")[0].args.sale_address;
   presale = await hre.ethers.getContractAt("Presale", presale_address);
+  console.log("presale at: ", presale_address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

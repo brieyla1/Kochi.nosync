@@ -3,18 +3,13 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_feesBP",
+        "name": "_transaction_fees",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "_startSaleId",
+        "name": "_presale_creation_fee",
         "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "_signer",
-        "type": "address"
       },
       {
         "internalType": "address",
@@ -22,9 +17,9 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "_deployFee",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "_vesting_factory",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -86,6 +81,25 @@
     "inputs": [
       {
         "indexed": false,
+        "internalType": "uint256",
+        "name": "sale_id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sale_address",
+        "type": "address"
+      }
+    ],
+    "name": "SaleCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
         "internalType": "address",
         "name": "account",
         "type": "address"
@@ -93,25 +107,6 @@
     ],
     "name": "Unpaused",
     "type": "event"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "addressToSaleId",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
   },
   {
     "inputs": [],
@@ -143,29 +138,120 @@
         "type": "string"
       },
       {
-        "internalType": "uint256[8]",
-        "name": "_saleInputs",
-        "type": "uint256[8]"
+        "components": [
+          {
+            "internalType": "enum ILaunchpadUtil.ERouter",
+            "name": "name",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "addr",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct ILaunchpadUtil.SRouter",
+        "name": "router",
+        "type": "tuple"
       },
       {
-        "internalType": "bool",
-        "name": "_whitelistEnabled",
-        "type": "bool"
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "tokenTotalAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "listingTokensPerOneBaseCurrency",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "hardcap",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "softcap",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokensPerOneBaseCurrency",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint64",
+            "name": "liquidityUnlockPercentage",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "liquidityUnlockTimestamp",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "liquidityUnlockEndTimestamp",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxBuyPerUser",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "minBuyPerUser",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenAmountForSale",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "tokenAmountForLiquidity",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint64",
+            "name": "publicSaleTimestamp",
+            "type": "uint64"
+          },
+          {
+            "internalType": "uint64",
+            "name": "publicSaleEndTimestamp",
+            "type": "uint64"
+          }
+        ],
+        "internalType": "struct ILaunchpadUtil.SInput",
+        "name": "financials",
+        "type": "tuple"
       },
       {
-        "internalType": "uint256",
-        "name": "_wlStartTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_liquidityUnlockTimestamp",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "_router",
-        "type": "address"
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "startTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "endTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address[]",
+            "name": "whitelisted",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct ILaunchpadUtil.SRound[]",
+        "name": "rounds",
+        "type": "tuple[]"
       }
     ],
     "name": "createPresale",
@@ -181,33 +267,7 @@
   },
   {
     "inputs": [],
-    "name": "currentSaleId",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "deployFee",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "feesBP",
+    "name": "current_sale_id",
     "outputs": [
       {
         "internalType": "uint256",
@@ -253,7 +313,7 @@
             "type": "address"
           }
         ],
-        "internalType": "struct LaunchpadMaster.Sale[]",
+        "internalType": "struct ILaunchpadUtil.SSale[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -289,57 +349,48 @@
   },
   {
     "inputs": [],
+    "name": "presale",
+    "outputs": [
+      {
+        "internalType": "contract Presale",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "presale_address",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "presale_creation_fee",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "saleIdToAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "saleIdToSale",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "saleId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "addr",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -365,24 +416,40 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_deployFee",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "setDeployFee",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "sale_id_to_sale",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "saleId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "addr",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_feesBP",
+        "name": "_presale_creation_fee",
         "type": "uint256"
       }
     ],
-    "name": "setFeesBP",
+    "name": "setPresaleCreationFee",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -396,6 +463,19 @@
       }
     ],
     "name": "setSigner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fees",
+        "type": "uint256"
+      }
+    ],
+    "name": "setfees",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -415,7 +495,7 @@
   },
   {
     "inputs": [],
-    "name": "startSaleId",
+    "name": "transaction_fee",
     "outputs": [
       {
         "internalType": "uint256",
@@ -437,6 +517,19 @@
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "vesting_factory",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

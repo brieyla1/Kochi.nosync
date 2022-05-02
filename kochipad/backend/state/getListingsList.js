@@ -1,9 +1,12 @@
-const { web3, master } = require('../web3.js');
+const { web3, master } = require("../web3.js");
 
 async function getListingList() {
   try {
-    return await master.methods.getSales().call();
+    const sales = await master.methods.getSales().call();
+    console.log(sales);
+    return sales;
   } catch (err) {
+    console.log(err);
     return err;
   }
 }

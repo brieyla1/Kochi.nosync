@@ -42,6 +42,8 @@ var root = {
   listings: async ({ full, sort }) => {
     const _listings = await state.functions.getListingList();
 
+    console.log(_listings);
+
     const listings = full ? _listings.slice(0, 30) : _listings.slice(0, 300);
     if (!full) return listings;
 

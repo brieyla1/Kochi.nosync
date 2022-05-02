@@ -39,5 +39,9 @@ module.exports = {
       url: `https://eth-rinkeby.alchemyapi.io/v2/wESK28uC2bhbARFkT_vl5GSzbklbOeKd`,
       accounts: env.HARDHAT_PRIVATE_KEYS,
     },
+
+    ganache: {
+      url: "http://0.0.0.0:7545",
+    },
   },
 };
